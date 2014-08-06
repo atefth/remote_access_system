@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'pgsql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return array(
 			'host'     => 'ec2-54-83-204-85.compute-1.amazonaws.com',
 			'database' => 'd96hipebrgremd',
 			'username' => 'zzgtohrpdnphbi',
-			'password' => '72AgjwlCpoWL_c0E4FacbzjBw',
+			'password' => '72AgjwlCpoWL_c0E4FacbzjBw-',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
