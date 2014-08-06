@@ -65,13 +65,14 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'forge',
-			'username' => 'forge',
-			'password' => '',
+			'host'     => 'ec2-54-83-204-85.compute-1.amazonaws.com',
+			'database' => 'd96hipebrgremd',
+			'username' => 'zzgtohrpdnphbi',
+			'password' => '72AgjwlCpoWL_c0E4FacbzjBw',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
+			'port'     => '5432',
 		),
 
 		'sqlsrv' => array(
