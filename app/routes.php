@@ -36,6 +36,6 @@ Route::get('turnOffSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordContro
 
 Route::get('getCommand/{id}', array('as' => 'switch', 'uses' => 'RecordController@getCommand'));
 
-Route::post('confirmCommand/', array('as' => 'switch', 'uses' => 'RecordController@confirmCommand'));
+Route::get('confirmCommand/', array('as' => 'switch', 'uses' => 'RecordController@confirmCommand'));
 
 Route::controller('records', 'RecordController');
