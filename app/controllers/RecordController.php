@@ -38,6 +38,7 @@ class RecordController extends BaseController {
     }
 
     public function confirmCommand(){
+        $page = 'home';
         return View::make('confirmation')->with('page', $page);
     }
 
