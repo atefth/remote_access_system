@@ -39,7 +39,7 @@ class RecordController extends BaseController {
     }
 
     public function getCommand($id){
-        return Record::command($id);
+        return '>>>'. Record::command($id);
     }
 
     public function confirmCommand(){
