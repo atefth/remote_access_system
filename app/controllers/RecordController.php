@@ -2,6 +2,11 @@
 
 class RecordController extends BaseController {
 
+    public function __construct()
+    {
+        Config::set('session.driver', 'array');
+    }
+
 	public function getIndex()
     {
     	$page = 'log';
