@@ -10,11 +10,12 @@
 				        <thead>
 				            <tr>
 				                <th>Site ID</th>
-						        <th>Site Name</th>
+						        <th>RFID</th>
 						        <th>Switch</th>
 						        <th>Status</th>
 						        <th>Command</th>
-						        <th>Time</th>
+						        <th>Time at Site</th>
+						        <th>Time at Server</th>
 				            </tr>
 				        </thead>
 
@@ -22,11 +23,12 @@
 				            @foreach ($records as $record)
 				                <tr>
 				                    <td>{{ $record->site_id }}</td>
-							        <td>{{ $record->site_name }}</td>
+							        <td>{{ $record->rfid }}</td>
 							        <td>{{ $record->switch }}</td>
 							        <td>{{ $record->status }}</td>
 							        <td>{{ $record->command }}</td>
-							        <td>{{ $record->updated_at }}</td>		                    
+							        <td>{{ $record->created_at }}</td>
+							        <td>{{ $record->updated_at }}</td>
 				                </tr>
 				            @endforeach
 				              
