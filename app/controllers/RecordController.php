@@ -22,6 +22,7 @@ class RecordController extends BaseController {
         $entry->switch = $id;
     	$entry->status = 'on';
     	$entry->command = 1;
+        $entry->rfid = 'nil';
     	$entry->save();
     	return Redirect::to('/control');
     }
@@ -34,6 +35,7 @@ class RecordController extends BaseController {
         $entry->switch = $id;
     	$entry->status = 'off';
     	$entry->command = 0;
+        $entry->rfid = 'nil';
     	$entry->save();
     	return Redirect::to('/control');
     }
