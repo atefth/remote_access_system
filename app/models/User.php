@@ -13,11 +13,15 @@ class User extends Eloquent {
 
 	public static function has_access($rfid){
     	$user = User::find($rfid);
-    	if ($user->has_access == 'granted') {
-    		return 1;
-    	}else{
-    		return 0;
-    	}
+    	if ($user) {
+            if ($user->has_access == 'granted') {
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            return 0;
+        }
     }
 
 }
