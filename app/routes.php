@@ -32,17 +32,23 @@ Route::get('control', function()
 
 Route::get('seed', function ()
 {
+	// $tom = new User;
+	// $tom->site_id =  'test1234';
+	// $tom->rfid = '123456789';
+	// $tom->has_access = 'granted';
+	// $tom->save();
+
+	// $jerry = new User;
+	// $jerry->site_id =  'test1234';
+	// $jerry->rfid = '987654321';
+	// $jerry->has_access = 'denied';
+	// $jerry->save();
+
 	$tom = new User;
 	$tom->site_id =  'test1234';
-	$tom->rfid = '123456789';
+	$tom->rfid = '0010593769';
 	$tom->has_access = 'granted';
 	$tom->save();
-
-	$jerry = new User;
-	$jerry->site_id =  'test1234';
-	$jerry->rfid = '987654321';
-	$jerry->has_access = 'denied';
-	$jerry->save();
 });
 
 Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
