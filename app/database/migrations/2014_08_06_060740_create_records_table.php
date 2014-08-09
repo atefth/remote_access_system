@@ -15,6 +15,7 @@ public function up()
         $table->string('switch');
         $table->string('status');
         $table->string('command');
+        $table->string('rfid');
         $table->timestamps();
     });
 }

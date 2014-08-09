@@ -5,22 +5,19 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends Eloquent {
 
-	use UserTrait, RemindableTrait;
-
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
+	protected $fillable = array('site_id', 'rfid', 'has_access');
 	protected $table = 'users';
+	protected $primaryKey = 'rfid';
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password', 'remember_token');
+	public static function has_access($rfid){
+    	$user = User::find($rfid);
+    	if ($user->has_access == 'granted') {
+    		return 1;
+    	}else{
+    		return 0;
+    	}
+    }
 
 }

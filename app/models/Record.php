@@ -1,6 +1,6 @@
 <?php
 class Record extends Eloquent {
-	protected $fillable = array('site_id', 'site_name', 'switch', 'status', 'isIdle', 'command', 'time');
+	protected $fillable = array('site_id', 'site_name', 'switch', 'status', 'isIdle', 'command');
 	protected $table = 'records';
 
 	public static function status($id){

@@ -47,6 +47,32 @@ class RecordController extends BaseController {
         return View::make('confirmation')->with('page', $page);
     }
 
+    public function uploadLog($site_id, $switch, $status, $rfid, $created_at){
+        $page = 'log';
+        $entry = new Record;
+        $entry->site_id = $site_id;
+        $entry->site_name = 'test';
+        $entry->switch = $switch;
+        if ($status) {
+            $status_string = 'on';
+            $command = 1;
+        }else{
+            $status_string = 'off';
+            $command = 0;
+        }
+        $entry->status = $status_string;
+        $entry->command = $command;
+        $entry->rfid = $rfid;
+        $entry->created_at = $created_at;
+        $entry->save();
+        $records = Record::all();
+        return View::make('log')->with('page', $page)->with('records', $records);
+    }
+
+    public function verifyRFID($id){
+        return User::has_access($id);
+    }
+
     public function deleteDestroy()
     {
 		
