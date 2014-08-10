@@ -73,7 +73,6 @@ class RecordController extends BaseController {
         $entry->created_at = $created_at;
         $entry->save();
         $records = Record::all();
-        return View::make('log')->with('page', $page)->with('records', $records);
     }
 
     public function verifyRFID($id){
