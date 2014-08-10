@@ -77,7 +77,7 @@ class RecordController extends BaseController {
     }
 
     public function verifyRFID($id){
-        return User::has_access($id);
+        return '>>>' . User::has_access($id);
     }
 
     public function deleteDestroy()
