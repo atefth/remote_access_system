@@ -46,7 +46,7 @@ Route::get('seed', function ()
 
 	$tom = new User;
 	$tom->site_id =  'test1234';
-	$tom->rfid = '0010593769';
+	$tom->rfid = '0000792269';
 	$tom->has_access = 'granted';
 	$tom->save();
 });
