@@ -57,7 +57,7 @@ Route::get('turnOffSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordContro
 
 Route::get('getCommand/{id}', array('as' => 'switch', 'uses' => 'RecordController@getCommand'));
 
-Route::get('getAll/', array('as' => 'switches', 'uses' => 'RecordController@getAllCommands'));
+Route::get('getAll/', array('as' => 'switches', 'uses' => 'RecordController@getAll'));
 
 Route::get('verifyRFID/{id}', array('as' => 'site', 'uses' => 'RecordController@verifyRFID'));
 
