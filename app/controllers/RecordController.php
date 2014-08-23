@@ -44,7 +44,7 @@ class RecordController extends BaseController {
         return '>>>'. Record::command($id);
     }
 
-    public function getAllCommands(){
+    public function getAll(){
         $switches = '>>>'. Record::command(1) . '>>>'. Record::command(2) . '>>>'. Record::command(3) . '>>>'. Record::command(4) . '>>>'. Record::command(5) . '>>>'. Record::command(6);
         return $switches;
     }
