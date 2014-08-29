@@ -56,13 +56,8 @@
 		function prevCombo () {
 			currentReport = [['Day', 'Door', 'Lights', 'Alarm', 'Generator', 'AC', 'Mains', 'Average']];
 			if (index - limit > 0) {
-				for (var i = 0; i < limit; i++) {
-					if ((index - limit + i) > 0) {
-						currentReport[currentReport.length] = reports[(index - limit) + i];
-						index--;
-					}
-				}
-				drawComboVisualization();
+				index = index-limit;
+				nextCombo();
 			};
 		 }
 
@@ -82,13 +77,8 @@
 		function prevPie () {
 			currentReport = [['Switch', 'Hits per Month']];
 			if (index - limit > 0) {
-				for (var i = 0; i < limit; i++) {
-					if (index - i > 0) {
-						currentReport[currentReport.length] = reports[index - i];
-						index--;
-					}
-				}
-				drawPieVisualization();
+				index = index - limit;
+				nextPie();
 			};
 		 }
 
