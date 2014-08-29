@@ -99,8 +99,8 @@
 				  <li <?php if($page == 'log') echo 'class="active"' ?>>
 				  	<a href="/records">Log</a>
 				  </li>
-				  <li <?php if($page == 'log') echo 'class="active"' ?>>
-				  	<a href="/reports">Log</a>
+				  <li <?php if($page == 'reports') echo 'class="active"' ?>>
+				  	<a href="/reports">Reports</a>
 				  </li>
 				</ul>
 			  </div>
