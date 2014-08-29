@@ -58,7 +58,7 @@
 			if (index - limit > 0) {
 				for (var i = 0; i < limit; i++) {
 					if ((index - limit + i) > 0) {
-						currentReport[currentReport.length] = reports[(index - limit + i)];
+						currentReport[currentReport.length] = reports[(index - limit) + i];
 						index--;
 					}
 				}
