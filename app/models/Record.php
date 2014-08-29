@@ -48,4 +48,9 @@ class Record extends Eloquent {
             return 0;
         }
     }
+
+    public function getDayAttribute()
+    {
+        return $this->updated_at->format('d.m.Y');
+    }
 }

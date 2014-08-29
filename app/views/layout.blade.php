@@ -9,6 +9,80 @@
     <!-- Referencing Bootstrap CSS that is hosted locally -->
     {{ HTML::style('css/bootstrap.min.css') }}
     {{ HTML::style('custom.css') }}
+    @if ($page == 'reports')
+    	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    	<script type="text/javascript">
+    	google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(defaultReport);
+		var index = 0;
+		var limit = 5;
+		var currentReport;
+
+		var reports = [<?php		  	
+		  	for ($i=0; $i < sizeof($reports); $i++) {
+		  		echo $reports[$i];
+		  		if ($i < sizeof($reports) - 1) {
+		  			echo ',';
+		  		}
+		  	} echo '];'?>
+		// defaultReport();
+		
+		function defaultReport () {
+			currentReport = [['Day', 'Door', 'Lights', 'Alarm', 'Generator', 'AC', 'Mains', 'Average']];
+			for (var i = 0; i < limit; i++) {
+				if (i < reports.length) {
+					currentReport[currentReport.length] = reports[i];
+					index = i;
+				}
+			}
+			drawVisualization();
+		}
+
+
+		function prev () {
+			currentReport = [['Day', 'Door', 'Lights', 'Alarm', 'Generator', 'AC', 'Mains', 'Average']];
+			var pointer = index;
+			for (var i = 0; i < limit; i++) {
+				pointer = (Math.abs(index-i))%reports.length;
+				if (i < reports.length) {
+					currentReport[currentReport.length] = reports[pointer];
+					index--;
+				}
+			}
+			drawVisualization();
+		 }
+
+		function next () {
+			currentReport = [['Day', 'Door', 'Lights', 'Alarm', 'Generator', 'AC', 'Mains', 'Average']];
+			var pointer = index;
+			for (var i = 0; i < limit; i++) {
+				pointer = (index+i)%reports.length;
+				if (i < reports.length) {
+					currentReport[currentReport.length] = reports[pointer];
+					index++;
+				}
+			}
+			drawVisualization();
+		 }
+
+		function drawVisualization() {
+			console.log(currentReport);
+		  // Some raw data (not necessarily accurate)
+		  var graph = google.visualization.arrayToDataTable(currentReport);
+
+		  var options = {
+		    title : 'Daily Updates from Central Server',
+		    vAxis: {title: "Activity"},
+		    hAxis: {title: "Day"},
+		    seriesType: "bars",
+		    series: {5: {type: "line"}}
+		  };
+
+		  var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+		  chart.draw(graph, options);
+		}
+    </script>
+    @endif
   </head>
     <body>
     	<div class="row-fluid container">
@@ -24,6 +98,9 @@
 				  </li>
 				  <li <?php if($page == 'log') echo 'class="active"' ?>>
 				  	<a href="/records">Log</a>
+				  </li>
+				  <li <?php if($page == 'log') echo 'class="active"' ?>>
+				  	<a href="/reports">Log</a>
 				  </li>
 				</ul>
 			  </div>

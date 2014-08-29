@@ -66,3 +66,5 @@ Route::get('confirmCommand/', array('as' => 'switch', 'uses' => 'RecordControlle
 Route::get('uploadLog/{site_id}/{switch}/{status}/{rfid}/{created_at}/', array('as' => 'log', 'uses' => 'RecordController@uploadLog'));
 
 Route::controller('records', 'RecordController');
+
+Route::controller('reports', 'ReportController');
