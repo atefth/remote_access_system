@@ -67,4 +67,6 @@ Route::get('uploadLog/{site_id}/{switch}/{status}/{rfid}/{created_at}/', array('
 
 Route::controller('records', 'RecordController');
 
-Route::controller('reports', 'ReportController');
+Route::get('combo/', array('as' => 'report', 'uses' => 'ReportController@getCombo'));
+
+Route::get('pie/', array('as' => 'report', 'uses' => 'ReportController@getPie'));

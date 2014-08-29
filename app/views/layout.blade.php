@@ -13,21 +13,24 @@
     	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     	<script type="text/javascript">
     	google.load("visualization", "1", {packages:["corechart"]});
-		google.setOnLoadCallback(defaultReport);
+		google.setOnLoadCallback(<?php if ($graph == 'combo') {
+			echo "defaultCombo";
+		}else{
+			echo "defaultPie";
+		} ?>);
 		var index = 0;
 		var limit = 5;
 		var currentReport;
 
 		var reports = [<?php		  	
-		  	for ($i=0; $i < sizeof($reports); $i++) {
-		  		echo $reports[$i];
-		  		if ($i < sizeof($reports) - 1) {
-		  			echo ',';
-		  		}
-		  	} echo '];'?>
-		// defaultReport();
-		
-		function defaultReport () {
+	  	for ($i=0; $i < sizeof($reports); $i++) {
+	  		echo $reports[$i];
+	  		if ($i < sizeof($reports) - 1) {
+	  			echo ',';
+	  		}
+	  	} echo '];'?>
+
+		function defaultCombo () {
 			currentReport = [['Day', 'Door', 'Lights', 'Alarm', 'Generator', 'AC', 'Mains', 'Average']];
 			for (var i = 0; i < limit; i++) {
 				if (i < reports.length) {
@@ -35,38 +38,74 @@
 					index = i;
 				}
 			}
-			drawVisualization();
+			drawComboVisualization();
+		}
+
+		function defaultPie () {
+			currentReport = [['Switch', 'Hits per Month']];
+			for (var i = 0; i < limit; i++) {
+				if (i < reports.length) {
+					currentReport[currentReport.length] = reports[i];
+					index = i;
+				}
+			}
+			drawPieVisualization();
 		}
 
 
-		function prev () {
+		function prevCombo () {
 			currentReport = [['Day', 'Door', 'Lights', 'Alarm', 'Generator', 'AC', 'Mains', 'Average']];
-			var pointer = index;
-			for (var i = 0; i < limit; i++) {
-				pointer = (Math.abs(index-i))%reports.length;
-				if (i < reports.length) {
-					currentReport[currentReport.length] = reports[pointer];
-					index--;
+			if (index - limit > 0) {
+				for (var i = 0; i < limit; i++) {
+					if (index - i > 0) {
+						currentReport[currentReport.length] = reports[index - i];
+						index--;
+					}
 				}
-			}
-			drawVisualization();
+				drawComboVisualization();
+			};
 		 }
 
-		function next () {
+		function nextCombo () {
 			currentReport = [['Day', 'Door', 'Lights', 'Alarm', 'Generator', 'AC', 'Mains', 'Average']];
-			var pointer = index;
-			for (var i = 0; i < limit; i++) {
-				pointer = (index+i)%reports.length;
-				if (i < reports.length) {
-					currentReport[currentReport.length] = reports[pointer];
-					index++;
+			if (index + limit < reports.length) {
+				for (var i = 0; i < limit; i++) {
+					if (index + i < reports.length) {
+						currentReport[currentReport.length] = reports[index+1];
+						index++;
+					}
 				}
-			}
-			drawVisualization();
+				drawComboVisualization();
+			};
 		 }
 
-		function drawVisualization() {
-			console.log(currentReport);
+		function prevPie () {
+			currentReport = [['Switch', 'Hits per Month']];
+			if (index - limit > 0) {
+				for (var i = 0; i < limit; i++) {
+					if (index - i > 0) {
+						currentReport[currentReport.length] = reports[index - i];
+						index--;
+					}
+				}
+				drawPieVisualization();
+			};
+		 }
+
+		function nextPie () {
+			currentReport = [['Switch', 'Hits per Month']];
+			if (index + limit < reports.length) {
+				for (var i = 0; i < limit; i++) {
+					if (index + i < reports.length) {
+						currentReport[currentReport.length] = reports[index+1];
+						index++;
+					}
+				}
+				drawPieVisualization();
+			};
+		 }
+
+		function drawComboVisualization() {
 		  // Some raw data (not necessarily accurate)
 		  var graph = google.visualization.arrayToDataTable(currentReport);
 
@@ -81,6 +120,19 @@
 		  var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
 		  chart.draw(graph, options);
 		}
+
+		function drawPieVisualization() {
+
+        var data = google.visualization.arrayToDataTable(currentReport);
+
+        var options = {
+          title: 'Monthly Hits'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
     </script>
     @endif
   </head>
@@ -100,7 +152,7 @@
 				  	<a href="/records">Log</a>
 				  </li>
 				  <li <?php if($page == 'reports') echo 'class="active"' ?>>
-				  	<a href="/reports">Reports</a>
+				  	<a href="/combo">Reports</a>
 				  </li>
 				</ul>
 			  </div>
