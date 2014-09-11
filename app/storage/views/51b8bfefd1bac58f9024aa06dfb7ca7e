@@ -1,0 +1,73 @@
+
+<?php $__env->startSection('content'); ?>
+	<div class="row-fluid span10 offset1">
+    	<div class="hero-unit col-centered">
+    		<h1>Use this menu to control switches at the remote site</h1> 
+    		<div class="well">
+    			<?php 
+    			if(!$status[0]) {
+			    	echo '<a href="/turnOnSwitch/1">
+			    		<button class="btn btn-success" style="margin-left:125px;" type="button">Turn on Switch 1</button>
+			    	</a>';
+		    	}else{
+		    		echo '<a href="/turnOffSwitch/1">
+			    		<button class="btn btn-danger" style="margin-left:125px;" type="button">Turn off Switch 1</button>
+			    	</a>';
+		    	}
+		    	?>
+		    	<?php 
+    			if(!$status[1]) {
+			    	echo '<a href="/turnOnSwitch/2">
+			    		<button class="btn btn-success" type="button">Turn on Switch 2</button>
+			    	</a>';
+		    	}else{
+		    		echo '<a href="/turnOffSwitch/2">
+			    		<button class="btn btn-danger" type="button">Turn off Switch 2</button>
+			    	</a>';
+		    	}
+		    	?><?php 
+    			if(!$status[2]) {
+			    	echo '<a href="/turnOnSwitch/3">
+			    		<button class="btn btn-success" type="button">Turn on Switch 3</button>
+			    	</a>';
+		    	}else{
+		    		echo '<a href="/turnOffSwitch/3">
+			    		<button class="btn btn-danger" type="button">Turn off Switch 3</button>
+			    	</a>';
+		    	}
+		    	?><?php 
+    			if(!$status[3]) {
+			    	echo '<a href="/turnOnSwitch/4">
+			    		<button class="btn btn-success" type="button">Turn on Switch 4</button>
+			    	</a>';
+		    	}else{
+		    		echo '<a href="/turnOffSwitch/4">
+			    		<button class="btn btn-danger" type="button">Turn off Switch 4</button>
+			    	</a>';
+		    	}
+		    	?><?php 
+    			if(!$status[4]) {
+			    	echo '<a href="/turnOnSwitch/5">
+			    		<button class="btn btn-success" type="button">Turn on Switch 5</button>
+			    	</a>';
+		    	}else{
+		    		echo '<a href="/turnOffSwitch/5">
+			    		<button class="btn btn-danger" type="button">Turn off Switch 5</button>
+			    	</a>';
+		    	}
+		    	?><?php 
+    			if(!$status[5]) {
+			    	echo '<a href="/turnOnSwitch/6">
+			    		<button class="btn btn-success" type="button">Turn on Switch 6</button>
+			    	</a>';
+		    	}else{
+		    		echo '<a href="/turnOffSwitch/6">
+			    		<button class="btn btn-danger" type="button">Turn off Switch 6</button>
+			    	</a>';
+		    	}
+		    	?>
+	    	</div>
+	    </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

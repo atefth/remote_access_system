@@ -1,0 +1,44 @@
+
+<?php $__env->startSection('content'); ?>
+    <div class="row-fluid span10 offset1">
+    	<div class="hero-unit col-centered">
+    		<h1>Use this menu to view logs generated from the remote site</h1> 
+    		<div class="well">
+		    	<?php if ($records->count()): ?>
+		    		 <table class="table table-striped table-bordered">
+				        <thead>
+				            <tr>
+				                <th>Site ID</th>
+						        <th>RFID</th>
+						        <th>Switch</th>
+						        <th>Status</th>
+						        <th>Command</th>
+						        <th>Time at Site</th>
+						        <th>Time at Server</th>
+				            </tr>
+				        </thead>
+
+				        <tbody>
+				            <?php foreach ($records as $record): ?>
+				                <tr>
+				                    <td><?php echo $record->site_id; ?></td>
+							        <td><?php echo $record->rfid; ?></td>
+							        <td><?php echo $record->switch; ?></td>
+							        <td><?php echo $record->status; ?></td>
+							        <td><?php echo $record->command; ?></td>
+							        <td><?php echo $record->created_at; ?></td>
+							        <td><?php echo $record->updated_at; ?></td>
+				                </tr>
+				            <?php endforeach; ?>
+				              
+				        </tbody>
+				      
+				    </table>
+				<?php else: ?>
+				    There are no logs
+				<?php endif; ?>
+	    	</div>
+	    </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
