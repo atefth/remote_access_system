@@ -9,9 +9,7 @@ class ReportController extends BaseController {
     {
         $this->beforeFilter(function()
         {
-            if (!Auth::check()) {
-            	return Redirect::to('/');
-            }
+            
         });
     }
 
