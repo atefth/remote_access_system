@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/', function()
-{
-	$page = 'home';
-	return View::make('home')->with('page', $page);
-});
+Route::get('/', 'LoginController@getIndex');
+// Route::post('login/attempt', 'LoginController@attempt');
 
 Route::get('control', function()
 {
@@ -30,26 +27,19 @@ Route::get('control', function()
 	return View::make('control')->with('page', $page)->with('status', $status);
 });
 
-Route::get('seed', function ()
-{
-	// $tom = new User;
-	// $tom->site_id =  'test1234';
-	// $tom->rfid = '123456789';
-	// $tom->has_access = 'granted';
-	// $tom->save();
+Route::get(
+	'/image/{file}',
+	'ImageController@getImage'
+);
 
-	// $jerry = new User;
-	// $jerry->site_id =  'test1234';
-	// $jerry->rfid = '987654321';
-	// $jerry->has_access = 'denied';
-	// $jerry->save();
+Route::get(
+    '/image/{size}/{file}',
+    'ImageController@getImage'
+);
 
-	$tom = new User;
-	$tom->site_id =  'test1234';
-	$tom->rfid = '0000792269';
-	$tom->has_access = 'granted';
-	$tom->save();
-});
+Route::resource('/user', 'UserController');
+
+Route::resource('/admin', 'AdminController');
 
 Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
 
@@ -66,6 +56,10 @@ Route::get('confirmCommand/', array('as' => 'switch', 'uses' => 'RecordControlle
 Route::get('uploadLog/{site_id}/{switch}/{status}/{rfid}/{created_at}/', array('as' => 'log', 'uses' => 'RecordController@uploadLog'));
 
 Route::controller('records', 'RecordController');
+
+Route::controller('home', 'HomeController');
+
+Route::controller('login', 'LoginController');
 
 Route::get('combo/', array('as' => 'report', 'uses' => 'ReportController@getCombo'));
 

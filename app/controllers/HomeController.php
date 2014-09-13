@@ -15,9 +15,23 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function index()
+	/**
+     * Instantiate a new HomeController instance.
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function()
+        {
+            if (!Auth::check()) {
+            	return Redirect::to('/');
+            }
+        });
+    }
+
+	public function getIndex()
 	{
-		return View::make('home');
+		$page = 'home';
+		return View::make('home')->with('page', $page);
 	}
 
 }

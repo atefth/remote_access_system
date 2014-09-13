@@ -2,6 +2,19 @@
 
 class ReportController extends BaseController {
 
+	/**
+     * Instantiate a new ReportController instance.
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function()
+        {
+            if (!Auth::check()) {
+            	return Redirect::to('/');
+            }
+        });
+    }
+
     public function getCombo()
     {
     	$start = 0;

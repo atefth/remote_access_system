@@ -5,6 +5,12 @@ class RecordController extends BaseController {
     public function __construct()
     {
         Config::set('session.driver', 'array');
+        $this->beforeFilter(function()
+        {
+            if (!Auth::check()) {
+                return Redirect::to('/');
+            }
+        });
     }
 
 	public function getIndex()

@@ -2,3 +2,17 @@
     float: none;
     margin: 0 auto;
 }
+
+.block_type{
+	min-height: 100px;
+	margin: 5 auto;
+}
+
+.header_type{
+	color: #3071A9;
+	border-color: #285E8E;
+}
+
+.login_btn{
+	margin-left: 85%;
+}
