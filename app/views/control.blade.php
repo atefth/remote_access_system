@@ -8,11 +8,11 @@
     			<?php 
     			if(!$status[0]) {
 			    	echo '<a href="/turnOnSwitch/1">
-			    		<button class="btn btn-success" style="margin-left:125px;" type="button">Turn on Door</button>
+			    		<button class="btn btn-success" style="margin-left:125px;" type="button">Open Door</button>
 			    	</a>';
 		    	}else{
 		    		echo '<a href="/turnOffSwitch/1">
-			    		<button class="btn btn-danger" style="margin-left:125px;" type="button">Turn off Door</button>
+			    		<button class="btn btn-danger" style="margin-left:125px;" type="button">Close Door</button>
 			    	</a>';
 		    	}
 		    	?>

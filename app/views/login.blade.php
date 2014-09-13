@@ -92,7 +92,7 @@
 		      <div class="caption">
 		        <h3>Innovation</h3>
 		        <p>Read more about SoftBot's Innovation</p>
-		        <p><a href="#" class="btn btn-primary" role="button">Inoovations</a></p>
+		        <p><a href="#" class="btn btn-primary" role="button">Innovations</a></p>
 		      </div>
 		    </div>
 		  </div>
