@@ -5,28 +5,27 @@
 	<!-- Default panel contents -->
 	<div class="panel-heading">All Users</div>
 	<div class="panel-body">
-  		<p>Listing all users registered</p>
+  		<p>Listing All Users Registered</p>
 	</div>
 
 	<!-- Table -->
 	@if ($users->count())
 		<table class="table table-striped table-bordered">
 			<thead>
-			    <tr>
-			    	<th>Actions</th>
+			    <tr>			    	
 			        <th>Name</th>
 			        <th>Phone</th>
 			        <th>Address</th>
 			        <th>Site ID</th>
 			        <th>RFID</th>
 			        <th>Access</th>
+			        <th>Actions</th>
 			    </tr>
 			</thead>
 
 			<tbody>
 			    @foreach ($users as $user)
-			        <tr>
-			        	<td><a href="/user/<?= $user->rfid ?>/edit" class="btn btn-info"><span class="glyphicon glyphicon-minus"></span> Edit</a></td>							
+			        <tr>			        	
 			            <td>{{ $user->f_name }} {{ $user->l_name }}</td>
 				        <td>{{ $user->phone }}</td>
 				        <td>{{ $user->address }}</td>
@@ -39,6 +38,10 @@
 				        		Denied
 				        	@endif
 				        </td>
+				        <td>
+			        		<a href="/user/<?= $user->rfid ?>/edit" class="btn btn-info"><span class="glyphicon glyphicon-minus"></span> Edit</a>
+			        		<a href="/user/<?= $user->rfid ?>" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Details</a>
+			        	</td>
 			        </tr>
 			    @endforeach
 			      

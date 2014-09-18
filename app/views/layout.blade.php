@@ -152,8 +152,11 @@
 					  <li <?php if($page == 'home') echo 'class="active"' ?>>
 					    <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
 					  </li>
-					  <li <?php if($page == 'control') echo 'class="active"' ?>>
-					  	<a href="/control"><span class="glyphicon glyphicon-tasks"></span> Control</a>
+					  <li <?php if($page == 'sites') echo 'class="active"' ?>>
+					  	<a href="/site"><span class="glyphicon glyphicon-record"></span> Sites</a>
+					  </li>
+					  <li <?php if($page == 'zones') echo 'class="active"' ?>>
+					  	<a href="/zone"><span class="glyphicon glyphicon-th-large"></span> Zones</a>
 					  </li>
 					  <li <?php if($page == 'log') echo 'class="active"' ?>>
 					  	<a href="/records"><span class="glyphicon glyphicon-list-alt"></span> Log</a>

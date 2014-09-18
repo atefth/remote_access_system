@@ -37,9 +37,27 @@ Route::get(
     'ImageController@getImage'
 );
 
-Route::resource('/user', 'UserController');
+Route::get('siteZone/{site_id}', 'SiteZoneController@index');
+Route::post('siteZone/update', 'SiteZoneController@update');
 
-Route::resource('/admin', 'AdminController');
+Route::get('siteUser/{site_id}', 'SiteUserController@index');
+Route::post('siteUser/update', 'SiteUserController@update');
+
+Route::get('zoneSite/{site_id}', 'ZoneSiteController@index');
+Route::post('zoneSite/update', 'ZoneSiteController@update');
+
+Route::get('zoneUser/{site_id}', 'ZoneUserController@index');
+Route::post('zoneUser/update', 'ZoneUserController@update');
+
+Route::post('user/updatePermissions', 'UserController@updatePermissions');
+
+Route::resource('user', 'UserController');
+
+Route::resource('admin', 'AdminController');
+
+Route::resource('zone', 'ZoneController');
+
+Route::resource('site', 'SiteController');
 
 Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
 
