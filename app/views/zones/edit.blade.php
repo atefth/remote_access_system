@@ -5,7 +5,7 @@
 	<div class='row'>
         <h1><span class="glyphicon glyphicon-minus-sign"></span> Edit Zone</h1>
      
-        {{ Form::model($zone, ['role' => 'form', 'url' => '/zone/' . $zone->rfid, 'method' => 'PUT']) }}
+        {{ Form::model($zone, ['role' => 'form', 'url' => '/zone/' . $zone->rfid, 'method' => 'put']) }}
      
         <div class='form-group col-md-5'>
             {{ Form::text('name', null, ['placeholder' => 'Zone Name', 'class' => 'form-control']) }}

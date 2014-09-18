@@ -38,7 +38,7 @@ class ZoneController extends \BaseController {
 	 */
 	public function store()
 	{
-		$zone = new zone;
+		$zone = new Zone;
 		$zone->name = Input::get('name');
 		$zone->save();
 
