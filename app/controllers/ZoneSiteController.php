@@ -42,9 +42,14 @@ class ZoneSiteController extends \BaseController {
 				$value->zone_id = $zone->id;
 				$value->save();
 			}
-			DB::table('site_user')->insert(
-			    array('user_id' => $value->rfid, 'site_id' => $value->id)
-			);
+			$users = User::all();
+			foreach ($users as $user) {
+				if ($zone->GivesAccessToUser($user->rfid)) {
+					DB::table('site_user')->insert(
+					    array('user_id' => $user->rfid, 'site_id' => $value->id)
+					);
+				}
+			}
 		}
 		return Redirect::to('zoneSite/'.$zone->id);
 	}
