@@ -16,9 +16,7 @@
 			        <th>Name</th>
 			        <th>Phone</th>
 			        <th>Address</th>
-			        <th>Site ID</th>
 			        <th>RFID</th>
-			        <th>Access</th>
 			        <th>Actions</th>
 			    </tr>
 			</thead>
@@ -29,15 +27,7 @@
 			            <td>{{ $user->f_name }} {{ $user->l_name }}</td>
 				        <td>{{ $user->phone }}</td>
 				        <td>{{ $user->address }}</td>
-				        <td>{{ $user->site_id }}</td>
 				        <td>{{ $user->rfid }}</td>
-				        <td>
-				        	@if ($user->has_access)
-				        		Granted
-				        	@else
-				        		Denied
-				        	@endif
-				        </td>
 				        <td>
 			        		<a href="/user/<?= $user->rfid ?>/edit" class="btn btn-info"><span class="glyphicon glyphicon-minus"></span> Edit</a>
 			        		<a href="/user/<?= $user->rfid ?>" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Details</a>
