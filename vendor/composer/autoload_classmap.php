@@ -1576,6 +1576,7 @@ return array(
     'Whoops\\Run' => $vendorDir . '/filp/whoops/src/Whoops/Run.php',
     'Zone' => $baseDir . '/app/models/Zone.php',
     'ZoneController' => $baseDir . '/app/controllers/ZoneController.php',
+    'ZoneRecord' => $baseDir . '/app/models/ZoneRecord.php',
     'ZoneRelay' => $baseDir . '/app/models/ZoneRelay.php',
     'ZoneSeeder' => $baseDir . '/app/database/seeds/ZoneSeeder.php',
     'ZoneSiteController' => $baseDir . '/app/controllers/ZoneSiteController.php',

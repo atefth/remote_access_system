@@ -26,10 +26,6 @@ class SiteController extends \BaseController {
 
 		foreach ($sites as $site) {
 			$relays = $site->Relays;
-			// foreach ($relays as $key => $value) {
-			// 	var_dump($key . ' => ' . $value);
-			// 	echo '</br>';
-			// }
 			
 			if (!$relays->count()) {
 				for ($i=0; $i < 6; $i++) {
@@ -37,12 +33,10 @@ class SiteController extends \BaseController {
 				}
 			}
 			foreach ($relays as $relay) {
-				// var_dump('Updating Relay ' . $relay . ' to ' . $relay->status);
 				$status['site_' . $site->id . '_status_' . $relay->relay_id] = $relay->status;
 			}
 		}
 		
-		// die();
 		$sites = Site::orderBy('id')->get();
 		$data = array(
 			'page' => 'sites',
@@ -162,53 +156,61 @@ class SiteController extends \BaseController {
     public function onCommand($site_id, $relay_id)
     {
         $site = Site::find($site_id);
-        $site_relays = $site->Relays;
-        if (!$site_relays->count()) {
-        	for ($i=0; $i < 6; $i++) { 
-        		Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
-        	}
+        if (!$site->Zone) {
+        	$site_relays = $site->Relays;
+	        if (!$site_relays->count()) {
+	        	for ($i=0; $i < 6; $i++) { 
+	        		Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
+	        	}
+	        }
+	    	$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
+	    	$relay = Relay::find($site_relay->id);
+	    	$relay->status = 'True';
+	    	$relay->save();
+
+	    	$entry = new Record;
+	        $entry->site_id = $site_id;
+	        $entry->site_name = $site->name;
+	        $entry->switch = $relay->relay_id;
+	    	$entry->status = 'On';
+	    	$entry->command = 1;
+	        $entry->rfid = 'nil';
+	    	$entry->save();
+
+        }else{
+        	$message = 'This site is zoned. Please update changes to the zone!';        	
+        	Session::put('message', $message);
         }
-    	$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
-    	$relay = Relay::find($site_relay->id);
-    	$relay->status = 'True';
-    	$relay->save();
-
-    	$entry = new Record;
-        $entry->site_id = $site_id;
-        $entry->site_name = $site->name;
-        $entry->switch = $relay->relay_id;
-    	$entry->status = 'On';
-    	$entry->command = 1;
-        $entry->rfid = 'nil';
-    	$entry->save();
-
-    	return Redirect::to('site/'.$site_id);
+        return Redirect::to('site');
     }
 
     public function OffCommand($site_id, $relay_id)
     {
         $site = Site::find($site_id);
-        $site_relays = $site->Relays;
-        if (!$site_relays->count()) {
-        	for ($i=0; $i < 6; $i++) { 
-        		Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
-        	}        	
+	    if (!$site->Zone) {
+	    	$site_relays = $site->Relays;
+	        if (!$site_relays->count()) {
+	        	for ($i=0; $i < 6; $i++) { 
+	        		Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
+	        	}        	
+	        }
+	    	$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
+	    	$relay = Relay::find($site_relay->id);
+	    	$relay->status = 'False';
+	    	$relay->save();
+
+	    	$entry = new Record;
+	        $entry->site_id = $site_id;
+	        $entry->site_name = $site->name;
+	        $entry->switch = $relay->relay_id;
+	    	$entry->status = 'Off';
+	    	$entry->command = 0;
+	        $entry->rfid = 'nil';
+	    	$entry->save();
+        }else{
+        	$message = 'This site is zoned. Please update changes to the zone!';
+        	Session::put('message', $message);
         }
-    	$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
-    	$relay = Relay::find($site_relay->id);
-    	$relay->status = 'False';
-    	$relay->save();
-
-    	$entry = new Record;
-        $entry->site_id = $site_id;
-        $entry->site_name = $site->name;
-        $entry->switch = $relay->relay_id;
-    	$entry->status = 'Off';
-    	$entry->command = 0;
-        $entry->rfid = 'nil';
-    	$entry->save();
-    	return Redirect::to('site/'.$site_id);
+        return Redirect::to('site/');
     }
-
-
 }

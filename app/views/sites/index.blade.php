@@ -1,5 +1,14 @@
 @extends('layout')
 
+@section('flash')	
+	@if (Session::has('message'))
+		<div class="alert alert-warning" role="alert">
+			<b>Oh Snap! </b>
+			{{ Session::get('message') }}
+		</div>
+	@endif
+@stop
+
 @section('content')
 
 <div class="panel panel-primary">

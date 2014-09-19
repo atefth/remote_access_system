@@ -62,18 +62,19 @@ Route::group(array('before'=>'auth'),function()
 	Route::get('zone/offCommand/{zone_id}/{relay_id}', 'ZoneController@offCommand');
 
 	Route::resource('site', 'SiteController');
+	Route::get('site', array('as' => 'sites', 'uses' => 'SiteController@index'));
 	Route::get('site/onCommand/{site_id}/{relay_id}', 'SiteController@onCommand');
 	Route::get('site/offCommand/{site_id}/{relay_id}', 'SiteController@offCommand');
 
-	Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
+	// Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
 
-	Route::get('turnOffSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OffCommand'));
+	// Route::get('turnOffSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OffCommand'));
 
 	Route::get('getCommand/{id}', array('as' => 'switch', 'uses' => 'RecordController@getCommand'));
 
 	Route::get('getAll/', array('as' => 'switches', 'uses' => 'RecordController@getAll'));
 
-	Route::get('verifyRFID/{id}', array('as' => 'site', 'uses' => 'RecordController@verifyRFID'));
+	// Route::get('verifyRFID/{id}', array('as' => 'site', 'uses' => 'RecordController@verifyRFID'));
 
 	Route::get('confirmCommand/', array('as' => 'switch', 'uses' => 'RecordController@confirmCommand'));
 

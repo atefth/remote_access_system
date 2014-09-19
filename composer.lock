@@ -505,12 +505,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ollieread/multiauth.git",
-                "reference": "b8a1e5d8dd0e81642e6b835058220443bf2a4066"
+                "reference": "2f737c221d439954031c3de83c8447002b0cf5c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ollieread/multiauth/zipball/b8a1e5d8dd0e81642e6b835058220443bf2a4066",
-                "reference": "b8a1e5d8dd0e81642e6b835058220443bf2a4066",
+                "url": "https://api.github.com/repos/ollieread/multiauth/zipball/2f737c221d439954031c3de83c8447002b0cf5c5",
+                "reference": "2f737c221d439954031c3de83c8447002b0cf5c5",
                 "shasum": ""
             },
             "require": {
@@ -543,7 +543,7 @@
                 "laravel",
                 "multi"
             ],
-            "time": "2014-08-27 11:51:35"
+            "time": "2014-09-14 13:25:59"
         },
         {
             "name": "patchwork/utf8",

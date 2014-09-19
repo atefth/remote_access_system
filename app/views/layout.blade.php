@@ -188,6 +188,7 @@
 				  </div>
 				</div>
 			@endif
+				@yield('flash')
 				@yield('content')
 				<div class="span8 offset4 well text-center">&#169; 2014 SoftBot Systems</div>			
 		</div>			

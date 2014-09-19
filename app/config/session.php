@@ -29,9 +29,9 @@ return array(
 	|
 	*/
 
-	'lifetime' => 120,
+	'lifetime' => 1440,
 
-	'expire_on_close' => false,
+	'expire_on_close' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return array(
 	|
 	*/
 
-	'cookie' => 'laravel_session',
+	'cookie' => 'ras_session',
 
 	/*
 	|--------------------------------------------------------------------------
