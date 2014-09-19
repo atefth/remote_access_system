@@ -177,7 +177,7 @@
 				<div class="navbar well">
 				  <div class="navbar-inner">
 				    <ul class="nav nav-pills">
-				    	<li class="active"><a href="#">SoftBot Remote Access System</a></li>
+				    	<li class="active"><a href="/">SoftBot Remote Access System</a></li>
 					  <li style="margin-left: 70%;">
 			  			<!-- Button trigger modal -->
 						<a href="" data-toggle="modal" data-target="#myModal">

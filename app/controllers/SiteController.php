@@ -174,7 +174,6 @@ class SiteController extends \BaseController {
 	        $entry->switch = $relay->relay_id;
 	    	$entry->status = 'On';
 	    	$entry->command = 1;
-	        $entry->rfid = 'nil';
 	    	$entry->save();
 
         }else{
@@ -205,7 +204,6 @@ class SiteController extends \BaseController {
 	        $entry->switch = $relay->relay_id;
 	    	$entry->status = 'Off';
 	    	$entry->command = 0;
-	        $entry->rfid = 'nil';
 	    	$entry->save();
         }else{
         	$message = 'This site is zoned. Please update changes to the zone!';

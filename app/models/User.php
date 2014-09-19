@@ -34,4 +34,9 @@ class User extends Eloquent {
         return $this->belongsToMany('Site', 'site_user');
     }
 
+    public function Records()
+    {
+        return $this->belongsTo('Record', 'user_id');
+    }
+
 }

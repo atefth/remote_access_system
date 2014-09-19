@@ -15,7 +15,7 @@ public function up()
         $table->string('switch');
         $table->string('status');
         $table->string('command');
-        $table->string('admin_id');
+        $table->string('user_id')->nullable();
         $table->timestamps();
     });
 }

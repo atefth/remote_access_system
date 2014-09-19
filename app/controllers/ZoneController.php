@@ -193,7 +193,6 @@ class ZoneController extends \BaseController {
 	        $entry->switch = $relay->relay_id;
 	    	$entry->status = 'On';
 	    	$entry->command = 1;
-	        $entry->admin_id = Auth::admin()->get()->id;
 	    	$entry->save();
     	}
 
@@ -242,7 +241,6 @@ class ZoneController extends \BaseController {
 	        $entry->switch = $relay->relay_id;
 	    	$entry->status = 'Off';
 	    	$entry->command = 0;
-	        $entry->admin_id = Auth::admin()->get()->id;
 	    	$entry->save();
     	}
 
