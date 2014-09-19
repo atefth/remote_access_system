@@ -83,11 +83,15 @@ class SiteController extends \BaseController {
 	public function show($id)
 	{
 		$site = Site::find($id);
-		$switch_status = $site->Relays;
+		$switch_relays = $site->Relays;
 		$status = array();
-		if ($switch_status->count()) {
-			foreach ($switch_status as $key => $value) {
-				$status[$key] = $value->Status;
+		if ($switch_relays->count()) {
+			foreach ($switch_relays as $key => $value) {
+				if ($value->status == 'True') {
+					$status[$value->relay_id] = 1;
+				}else{
+					$status[$value->relay_id] = 0;
+				}
 			}
 		}else{
 			for ($i=0; $i < 6; $i++) { 
@@ -170,7 +174,7 @@ class SiteController extends \BaseController {
         $entry->rfid = 'nil';
     	$entry->save();
 
-    	return Redirect::to('site');
+    	return Redirect::to('site/'.$site_id);
     }
 
     public function OffCommand($site_id, $relay_id)
@@ -195,7 +199,7 @@ class SiteController extends \BaseController {
     	$entry->command = 0;
         $entry->rfid = 'nil';
     	$entry->save();
-    	return Redirect::to('site');
+    	return Redirect::to('site/'.$site_id);
     }
 
 
