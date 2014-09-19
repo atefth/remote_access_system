@@ -136,7 +136,7 @@ class UserController extends \BaseController {
 			$selected_site = Input::get('selected_site_'.$value->id);
 			if ($selected_site) {
 				$site = Site::find($selected_site);
-				if ($site->GivesAccessTosite($user->rfid) == 'Denied') {
+				if ($site->GivesAccessToUser($user->rfid) == 'Denied') {
 					DB::table('site_user')->insert(
 					    array('site_id' => $value->id, 'user_id' => $user->rfid)
 					);
