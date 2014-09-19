@@ -14,7 +14,7 @@ class CreateUserZoneTable extends Migration {
 	{
 		Schema::create('user_zone', function($table)
 		{
-		    $table->integer('user_id');
+		    $table->string('user_id');
 		    $table->integer('zone_id');
 		});
 	}

@@ -14,7 +14,7 @@ class CreateSiteUserTable extends Migration {
 	{
 		Schema::create('site_user', function($table)
 		{
-		    $table->integer('user_id');
+		    $table->string('user_id');
 		    $table->integer('site_id');
 		});
 	}
