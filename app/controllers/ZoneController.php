@@ -9,7 +9,7 @@ class ZoneController extends \BaseController {
     {
         $this->beforeFilter(function()
         {
-            if (!Auth::check()) {
+            if (!Auth::admin()) {
             	return Redirect::to('/');
             }
         });
