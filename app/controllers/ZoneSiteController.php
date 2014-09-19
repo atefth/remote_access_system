@@ -43,7 +43,7 @@ class ZoneSiteController extends \BaseController {
 				$value->save();
 			}
 			DB::table('site_user')->insert(
-			    array('user_id' => $value->rfid, 'site_id' => $site->id)
+			    array('user_id' => $value->rfid, 'site_id' => $value->id)
 			);
 		}
 		return Redirect::to('zoneSite/'.$zone->id);
