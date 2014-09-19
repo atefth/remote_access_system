@@ -21,9 +21,25 @@ class SiteController extends \BaseController {
 	 */
 	public function index()
 	{
+		$sites = Site::all();
+		$status = array();
+		foreach ($sites as $site_count => $site) {
+			$count = $site_count + 1;			
+			$switch_relays = $site->Relays;
+			if ($switch_relays->count()) {
+				foreach ($switch_relays as $relay) {
+					$status['site_' . $count . '_status_' . $relay->relay_id] = $relay->status;
+				}
+			}else{
+				for ($i=0; $i < 6; $i++) { 
+					$status['site_' . $count . '_status_' . $i] = 'False';					
+				}
+			}
+		}
 		$data = array(
 			'page' => 'sites',
-			'sites' => Site::all()
+			'sites' => $sites,
+			'status' => $status
 			);
 		return View::make('sites.index', $data);
 	}
@@ -130,6 +146,57 @@ class SiteController extends \BaseController {
 	{
 		//
 	}
+
+    public function onCommand($site_id, $relay_id)
+    {
+        $site = Site::find($site_id);
+        $site_relays = $site->Relays;
+        if (!$site_relays->count()) {
+        	for ($i=0; $i < 6; $i++) { 
+        		Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
+        	}
+        }
+    	$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
+    	$relay = Relay::find($site_relay->id);
+    	$relay->status = 'True';
+    	$relay->save();
+
+    	$entry = new Record;
+        $entry->site_id = $site_id;
+        $entry->site_name = $site->name;
+        $entry->switch = $relay->relay_id;
+    	$entry->status = 'On';
+    	$entry->command = 1;
+        $entry->rfid = 'nil';
+    	$entry->save();
+
+    	return Redirect::to('site');
+    }
+
+    public function OffCommand($site_id, $relay_id)
+    {
+        $site = Site::find($site_id);
+        $site_relays = $site->Relays;
+        if (!$site_relays->count()) {
+        	for ($i=0; $i < 6; $i++) { 
+        		Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
+        	}        	
+        }
+    	$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
+    	$relay = Relay::find($site_relay->id);
+    	$relay->status = 'False';
+    	$relay->save();
+
+    	$entry = new Record;
+        $entry->site_id = $site_id;
+        $entry->site_name = $site->name;
+        $entry->switch = $relay->relay_id;
+    	$entry->status = 'Off';
+    	$entry->command = 0;
+        $entry->rfid = 'nil';
+    	$entry->save();
+    	return Redirect::to('site');
+    }
 
 
 }

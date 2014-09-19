@@ -60,6 +60,8 @@ Route::group(array('before'=>'auth'),function()
 	Route::resource('zone', 'ZoneController');
 
 	Route::resource('site', 'SiteController');
+	Route::get('site/onCommand/{site_id}/{relay_id}', 'SiteController@onCommand');
+	Route::get('site/offCommand/{site_id}/{relay_id}', 'SiteController@offCommand');
 
 	Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
 
