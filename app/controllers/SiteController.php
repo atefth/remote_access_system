@@ -22,20 +22,28 @@ class SiteController extends \BaseController {
 	public function index()
 	{
 		$sites = Site::all();
-		$status = array();
-		foreach ($sites as $site_count => $site) {
-			$count = $site_count + 1;			
-			$switch_relays = $site->Relays;
-			if ($switch_relays->count()) {
-				foreach ($switch_relays as $relay) {
-					$status['site_' . $count . '_status_' . $relay->relay_id] = $relay->status;
-				}
-			}else{
-				for ($i=0; $i < 6; $i++) { 
-					$status['site_' . $count . '_status_' . $i] = 'False';					
+		$status = array();		
+
+		foreach ($sites as $site) {
+			$relays = $site->Relays;
+			// foreach ($relays as $key => $value) {
+			// 	var_dump($key . ' => ' . $value);
+			// 	echo '</br>';
+			// }
+			
+			if (!$relays->count()) {
+				for ($i=0; $i < 6; $i++) {
+					$status['site_' . $site->id . '_status_' . $i] = 'False';
 				}
 			}
+			foreach ($relays as $relay) {
+				// var_dump('Updating Relay ' . $relay . ' to ' . $relay->status);
+				$status['site_' . $site->id . '_status_' . $relay->relay_id] = $relay->status;
+			}
 		}
+		
+		// die();
+		$sites = Site::orderBy('id')->get();
 		$data = array(
 			'page' => 'sites',
 			'sites' => $sites,

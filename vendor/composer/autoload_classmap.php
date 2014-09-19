@@ -39,6 +39,7 @@ return array(
     'CreateSitesTable' => $baseDir . '/app/database/migrations/2014_09_18_114732_create_sites_table.php',
     'CreateUserZoneTable' => $baseDir . '/app/database/migrations/2014_09_18_114007_create_user_zone_table.php',
     'CreateUsersTable' => $baseDir . '/app/database/migrations/2014_08_09_112017_create_users_table.php',
+    'CreateZoneRecordsTable' => $baseDir . '/app/database/migrations/2014_09_19_110257_create_zone_records_table.php',
     'CreateZoneRelays' => $baseDir . '/app/database/migrations/2014_09_18_192410_create_zone_relays.php',
     'CreateZonesTable' => $baseDir . '/app/database/migrations/2014_09_18_113357_create_zones_table.php',
     'Crypt_AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
@@ -1575,7 +1576,8 @@ return array(
     'Whoops\\Run' => $vendorDir . '/filp/whoops/src/Whoops/Run.php',
     'Zone' => $baseDir . '/app/models/Zone.php',
     'ZoneController' => $baseDir . '/app/controllers/ZoneController.php',
+    'ZoneRelay' => $baseDir . '/app/models/ZoneRelay.php',
     'ZoneSeeder' => $baseDir . '/app/database/seeds/ZoneSeeder.php',
+    'ZoneSiteController' => $baseDir . '/app/controllers/ZoneSiteController.php',
     'ZoneUserController' => $baseDir . '/app/controllers/ZoneUserController.php',
-    'ZonezoneController' => $baseDir . '/app/controllers/ZoneSiteController.php',
 );

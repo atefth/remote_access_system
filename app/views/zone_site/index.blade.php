@@ -3,6 +3,11 @@
 @section('content')
 <div class="panel">
 	<ul class="nav nav-pills">
+	  <li <?php if ($tab == 'list') {
+	   echo 'class="active"';
+	   } ?>>
+	  	<a href="/zone">List All</a>
+	  </li>
 	  <li <?php if ($tab == 'zones') {
 	   echo 'class="active"';
 	   } ?>>

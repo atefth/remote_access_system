@@ -21,9 +21,25 @@ class ZoneController extends \BaseController {
 	 */
 	public function index()
 	{
+		$zones = Zone::orderBy('id')->get();
+		$status = array();
+		foreach ($zones as $zone_count => $zone) {
+			$count = $zone_count + 1;			
+			$switch_relays = $zone->Relays;
+			if ($switch_relays->count()) {
+				foreach ($switch_relays as $relay) {
+					$status['zone_' . $count . '_status_' . $relay->relay_id] = $relay->status;
+				}
+			}else{
+				for ($i=0; $i < 6; $i++) { 
+					$status['zone_' . $count . '_status_' . $i] = 'False';					
+				}
+			}
+		}
 		$data = array(
 			'page' => 'zones',
-			'zones' => Zone::all()
+			'zones' => $zones,
+			'status' => $status
 			);
 		return View::make('zones.index', $data);
 	}
@@ -67,11 +83,15 @@ class ZoneController extends \BaseController {
 	public function show($id)
 	{
 		$zone = Zone::find($id);
-		$switch_status = $zone->Relays;
+		$switch_relays = $zone->Relays;
 		$status = array();
-		if ($switch_status->count()) {
-			foreach ($switch_status as $key => $value) {
-				$status[$key] = $value->Status;
+		if ($switch_relays->count()) {
+			foreach ($switch_relays as $key => $value) {
+				if ($value->status == 'True') {
+					$status[$value->relay_id] = 1;
+				}else{
+					$status[$value->relay_id] = 0;
+				}
 			}
 		}else{
 			for ($i=0; $i < 6; $i++) { 
@@ -131,5 +151,102 @@ class ZoneController extends \BaseController {
 		//
 	}
 
+	public function onCommand($zone_id, $relay_id)
+    {
+        $zone = Zone::find($zone_id);
+        $zone_sites = $zone->Sites;
+        $zone_relays = $zone->Relays;
+        if (!$zone_relays->count()) {
+        	for ($i=0; $i < 6; $i++) { 
+        		ZoneRelay::create(array('zone_id' => $zone_id, 'relay_id' => $i, 'status' => 'False'));
+        	}
+        }
+    	$zone_relay = ZoneRelay::withZoneAndRelay($zone_id, $relay_id)->get()->first();
+    	$relay = ZoneRelay::find($zone_relay->id);
+    	$relay->status = 'True';
+    	$relay->save();
+
+    	$entry = new ZoneRecord;
+        $entry->zone_id = $zone->id;
+        $entry->zone_name = $zone->name;
+        $entry->switch = $relay->relay_id;
+    	$entry->status = 'On';
+    	$entry->command = 1;
+        $entry->admin_id = Auth::admin()->get()->id;
+    	$entry->save();
+
+    	foreach ($zone_sites as $zone_site) {
+    		$site_relays = $zone_site->Relays;
+			if (!$site_relays->count()) {
+				for ($i=0; $i < 6; $i++) { 
+	        		Relay::create(array('site_id' => $zone_site->id, 'relay_id' => $i, 'status' => 'False'));
+	        	}
+			}
+			$site_relay = Relay::withSiteAndRelay($zone_site->id, $zone_relay->relay_id)->get()->first();
+			$relay = Relay::find($site_relay->id);
+			$relay->status = 'True';
+			$relay->save();
+
+    		$entry = new Record;
+	        $entry->site_id = $zone_site->id;
+	        $entry->site_name = $zone_site->name;
+	        $entry->switch = $relay->relay_id;
+	    	$entry->status = 'On';
+	    	$entry->command = 1;
+	        $entry->admin_id = Auth::admin()->get()->id;
+	    	$entry->save();
+    	}
+
+    	return Redirect::to('zone/'.$zone_id);
+    }
+
+    public function OffCommand($zone_id, $relay_id)
+    {
+        $zone = Zone::find($zone_id);
+        $zone_sites = $zone->Sites;
+        $zone_relays = $zone->Relays;
+        if (!$zone_relays->count()) {
+        	for ($i=0; $i < 6; $i++) { 
+        		ZoneRelay::create(array('zone_id' => $zone_id, 'relay_id' => $i, 'status' => 'False'));
+        	}        	
+        }
+    	$zone_relay = ZoneRelay::withZoneAndRelay($zone_id, $relay_id)->get()->first();
+    	$relay = ZoneRelay::find($zone_relay->id);
+    	$relay->status = 'False';
+    	$relay->save();
+
+    	$entry = new ZoneRecord;
+        $entry->zone_id = $zone->id;
+        $entry->zone_name = $zone->name;
+        $entry->switch = $relay->relay_id;
+    	$entry->status = 'Off';
+    	$entry->command = 0;
+        $entry->admin_id = Auth::admin()->get()->id;
+    	$entry->save();
+
+    	foreach ($zone_sites as $zone_site) {
+    		$site_relays = $zone_site->Relays;
+			if (!$site_relays->count()) {
+				for ($i=0; $i < 6; $i++) { 
+	        		Relay::create(array('site_id' => $zone_site->id, 'relay_id' => $i, 'status' => 'False'));
+	        	}						
+			}
+			$site_relay = Relay::withSiteAndRelay($zone_site->id, $zone_relay->relay_id)->get()->first();
+			$relay = Relay::find($site_relay->id);
+			$relay->status = 'False';
+			$relay->save();
+
+    		$entry = new Record;
+	        $entry->site_id = $zone_site->id;
+	        $entry->site_name = $zone_site->name;
+	        $entry->switch = $relay->relay_id;
+	    	$entry->status = 'Off';
+	    	$entry->command = 0;
+	        $entry->admin_id = Auth::admin()->get()->id;
+	    	$entry->save();
+    	}
+
+    	return Redirect::to('zone/'.$zone_id);
+    }
 
 }

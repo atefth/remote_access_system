@@ -10,12 +10,12 @@ public function up()
     Schema::create('records', function($table)
     {
         $table->increments('id');
-        $table->string('site_id');
+        $table->integer('site_id');
         $table->string('site_name');
         $table->string('switch');
         $table->string('status');
         $table->string('command');
-        $table->string('rfid');
+        $table->string('admin_id');
         $table->timestamps();
     });
 }

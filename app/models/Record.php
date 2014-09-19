@@ -1,6 +1,6 @@
 <?php
 class Record extends Eloquent {
-	protected $fillable = array('site_id', 'site_name', 'switch', 'status', 'isIdle', 'command');
+    protected $fillable = array('zone_id', 'zone_name', 'switch', 'status', 'command', 'admin_id');
 	protected $table = 'records';
 
 	public static function status($id){
@@ -52,5 +52,10 @@ class Record extends Eloquent {
     public function getDayAttribute()
     {
         return $this->updated_at->format('d.m.Y');
+    }
+
+    public function Admin()
+    {
+        return $this->belongsTo('Admin');
     }
 }

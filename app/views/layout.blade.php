@@ -150,7 +150,7 @@
 				    <ul class="nav nav-pills">
 				    	<li><a href="http://softbotsys.herokuapp.com">SoftBot RAS</a></li>
 					  <li <?php if($page == 'home') echo 'class="active"' ?>>
-					    <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+					    <a href="/home"><span class="glyphicon glyphicon-home"></span> Home</a>
 					  </li>
 					  <li <?php if($page == 'sites') echo 'class="active"' ?>>
 					  	<a href="/site"><span class="glyphicon glyphicon-record"></span> Sites</a>

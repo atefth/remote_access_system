@@ -36,4 +36,14 @@ class Admin extends Eloquent implements UserInterface {
 		return "remember_token";
 	}
 
+	public function Records()
+	{
+		return $this->hasMany('Record', 'admin_id');
+	}
+
+	public function ZoneRecords()
+	{
+		return $this->hasMany('ZoneRecord', 'admin_id');
+	}
+
 }

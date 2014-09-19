@@ -58,6 +58,8 @@ Route::group(array('before'=>'auth'),function()
 	Route::resource('admin', 'AdminController');
 
 	Route::resource('zone', 'ZoneController');
+	Route::get('zone/onCommand/{zone_id}/{relay_id}', 'ZoneController@onCommand');
+	Route::get('zone/offCommand/{zone_id}/{relay_id}', 'ZoneController@offCommand');
 
 	Route::resource('site', 'SiteController');
 	Route::get('site/onCommand/{site_id}/{relay_id}', 'SiteController@onCommand');
