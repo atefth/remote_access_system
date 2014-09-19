@@ -3,6 +3,18 @@
 class ZoneController extends \BaseController {
 
 	/**
+     * Instantiate a new ZoneController instance.
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function()
+        {
+            if (!Auth::check();) {
+            	return Redirect::to('/');
+            }
+        });
+    }
+	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
