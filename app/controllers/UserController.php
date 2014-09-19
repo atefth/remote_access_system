@@ -9,7 +9,9 @@ class UserController extends \BaseController {
     {
         $this->beforeFilter(function()
         {
-            Auth::check();
+            if (!Auth::check();) {
+            	return Redirect::to('/');
+            }
         });
     }
 

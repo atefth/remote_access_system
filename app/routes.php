@@ -37,48 +37,51 @@ Route::get(
     'ImageController@getImage'
 );
 
-Route::get('siteZone/{site_id}', 'SiteZoneController@index');
-Route::post('siteZone/update', 'SiteZoneController@update');
+Route::group(array('before'=>'auth'),function()
+{
+	Route::get('siteZone/{site_id}', 'SiteZoneController@index');
+	Route::post('siteZone/update', 'SiteZoneController@update');
 
-Route::get('siteUser/{site_id}', 'SiteUserController@index');
-Route::post('siteUser/update', 'SiteUserController@update');
+	Route::get('siteUser/{site_id}', 'SiteUserController@index');
+	Route::post('siteUser/update', 'SiteUserController@update');
 
-Route::get('zoneSite/{site_id}', 'ZoneSiteController@index');
-Route::post('zoneSite/update', 'ZoneSiteController@update');
+	Route::get('zoneSite/{site_id}', 'ZoneSiteController@index');
+	Route::post('zoneSite/update', 'ZoneSiteController@update');
 
-Route::get('zoneUser/{site_id}', 'ZoneUserController@index');
-Route::post('zoneUser/update', 'ZoneUserController@update');
+	Route::get('zoneUser/{site_id}', 'ZoneUserController@index');
+	Route::post('zoneUser/update', 'ZoneUserController@update');
 
-Route::post('user/updatePermissions', 'UserController@updatePermissions');
+	Route::post('user/updatePermissions', 'UserController@updatePermissions');
 
-Route::resource('user', 'UserController');
+	Route::resource('user', 'UserController');
 
-Route::resource('admin', 'AdminController');
+	Route::resource('admin', 'AdminController');
 
-Route::resource('zone', 'ZoneController');
+	Route::resource('zone', 'ZoneController');
 
-Route::resource('site', 'SiteController');
+	Route::resource('site', 'SiteController');
 
-Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
+	Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
 
-Route::get('turnOffSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OffCommand'));
+	Route::get('turnOffSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OffCommand'));
 
-Route::get('getCommand/{id}', array('as' => 'switch', 'uses' => 'RecordController@getCommand'));
+	Route::get('getCommand/{id}', array('as' => 'switch', 'uses' => 'RecordController@getCommand'));
 
-Route::get('getAll/', array('as' => 'switches', 'uses' => 'RecordController@getAll'));
+	Route::get('getAll/', array('as' => 'switches', 'uses' => 'RecordController@getAll'));
 
-Route::get('verifyRFID/{id}', array('as' => 'site', 'uses' => 'RecordController@verifyRFID'));
+	Route::get('verifyRFID/{id}', array('as' => 'site', 'uses' => 'RecordController@verifyRFID'));
 
-Route::get('confirmCommand/', array('as' => 'switch', 'uses' => 'RecordController@confirmCommand'));
+	Route::get('confirmCommand/', array('as' => 'switch', 'uses' => 'RecordController@confirmCommand'));
 
-Route::get('uploadLog/{site_id}/{switch}/{status}/{rfid}/{created_at}/', array('as' => 'log', 'uses' => 'RecordController@uploadLog'));
+	Route::get('uploadLog/{site_id}/{switch}/{status}/{rfid}/{created_at}/', array('as' => 'log', 'uses' => 'RecordController@uploadLog'));
 
-Route::controller('records', 'RecordController');
+	Route::controller('records', 'RecordController');
 
-Route::controller('home', 'HomeController');
+	Route::controller('home', 'HomeController');
 
-Route::controller('login', 'LoginController');
+	Route::controller('login', 'LoginController');
 
-Route::get('combo/', array('as' => 'report', 'uses' => 'ReportController@getCombo'));
+	Route::get('combo/', array('as' => 'report', 'uses' => 'ReportController@getCombo'));
 
-Route::get('pie/', array('as' => 'report', 'uses' => 'ReportController@getPie'));
+	Route::get('pie/', array('as' => 'report', 'uses' => 'ReportController@getPie'));
+});
