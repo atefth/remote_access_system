@@ -11,7 +11,7 @@
 	  <li <?php if ($tab == 'zones') {
 	   echo 'class="active"';
 	   } ?>>
-	  	<a href="<?php echo '/zones/'.$zone->id; ?>">Details</a>
+	  	<a href="<?php echo '/zone/'.$zone->id; ?>">Details</a>
 	  </li>
 	  <li <?php if ($tab == 'access') {
 	   echo 'class="active"';
