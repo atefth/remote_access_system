@@ -43,7 +43,7 @@ class ZoneUserController extends \BaseController {
 				if ($zone->GivesAccessToUser($value->rfid) == 'Denied') {
 					DB::table('user_zone')->insert(
 					    array('user_id' => $value->rfid, 'zone_id' => $zone->id)
-					);					
+					);
 					foreach ($sites as $site) {
 						DB::table('site_user')->insert(
 						    array('user_id' => $value->rfid, 'site_id' => $site->id)
