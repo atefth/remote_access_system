@@ -34,7 +34,8 @@
 		<table class="table table-striped table-bordered">
 			<tr>
 				<thead>
-					<th>Site</th>
+					<th>Site Name</th>
+					<th>Zone Name</th>
 					<th>Status</th>
 					<th>Actions</th>
 				</thead>
@@ -42,6 +43,13 @@
 					@foreach ($sites as $site)
 						<tr>
 							<td>{{ $site->name }}</td>
+							<td>
+				            	@if ($site->Zone)
+				            		{{ $site->Zone->name }}
+				            	@else
+				            		Not Zoned Yet
+				            	@endif
+				            </td>
 							<td>
 								@if($site->Zone && $site->Zone->name == $zone->name)
 									<span class="glyphicon glyphicon-ok"> Assigned</span>

@@ -15,7 +15,8 @@
 			<thead>
 			    <tr>
 			    	<th>Actions</th>
-			        <th>Name</th>
+			        <th>Site Name</th>
+			        <th>Zone Name</th>
 			        <th>Door</th>
 			        <th>Light</th>
 			        <th>Alarm</th>
@@ -33,6 +34,13 @@
 			        		<a href="/site/<?= $site->id ?>" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Details</a>
 			        	</td>							
 			            <td>{{ $site->name }}</td>
+			            <td>
+			            	@if ($site->Zone)
+			            		{{ $site->Zone->name }}
+			            	@else
+			            		Not Zoned Yet
+			            	@endif
+			            </td>
 				        <td>
 							@if ($status['site_'.$site->id.'_status_0'] == 'False')
 						    	<a href="/site/onCommand/{{ $site->id }}/0">
