@@ -3,10 +3,15 @@
 @section('content')
 <div class="panel">
 	<ul class="nav nav-pills">
+	  <li <?php if ($tab == 'list') {
+	   echo 'class="active"';
+	   } ?>>
+	  	<a href="/site">List All</a>
+	  </li>
 	  <li <?php if ($tab == 'sites') {
 	   echo 'class="active"';
 	   } ?>>
-	  	<a href="<?php echo '/sites/'.$site->id; ?>">Details</a>
+	  	<a href="<?php echo '/site/'.$site->id; ?>">Details</a>
 	  </li>
 	  <li <?php if ($tab == 'access') {
 	   echo 'class="active"';
