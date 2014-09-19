@@ -34,35 +34,71 @@
 			        	</td>							
 			            <td>{{ $site->name }}</td>
 				        <td>
-				        	<a href="/turnOnSwitch/1">
-					    		<button class="btn btn-success" type="button">Open</button>
-					    	</a>
-			    		</td>
-				        <td>
-				        	<a href="/turnOnSwitch/2">
-					    		<button class="btn btn-success" type="button">Turn On</button>
-					    	</a>
-					    </td>
-				        <td>
-				        	<a href="/turnOnSwitch/3">
-					    		<button class="btn btn-success" type="button">Turn On</button>
-					    	</a>
-					    </td>
-				        <td>
-				        	<a href="/turnOnSwitch/4">
-					    		<button class="btn btn-success" type="button">Turn On</button>
-					    	</a>
-				        </td>
-				        <td>
-				        	<a href="/turnOnSwitch/5">
-					    		<button class="btn btn-success" type="button">Turn On</button>
-					    	</a>
-				        </td>
-				        <td>
-				        	<a href="/turnOnSwitch/6">
-					    		<button class="btn btn-success" type="button">Turn On</button>
-					    	</a>
-				        </td>
+							@if ($status['site_'.$site->id.'_status_0'] == 'False')
+						    	<a href="/site/onCommand/{{ $site->id }}/0">
+						    		<button class="btn btn-success" style="margin-left:15%;" type="button">Open</button>
+						    	</a>
+					    	@else
+					    		<a href="/site/offCommand/{{ $site->id }}/0">
+						    		<button class="btn btn-danger" style="margin-left:15%;" type="button">Close</button>
+						    	</a>
+					    	@endif
+				    	</td>
+				    	<td>
+					    	@if ($status['site_'.$site->id.'_status_1'] == 'False')
+						    	<a href="/site/onCommand/{{ $site->id }}/1">
+						    		<button class="btn btn-success" type="button">On</button>
+						    	</a>
+					    	@else
+					    		<a href="/site/offCommand/{{ $site->id }}/1">
+						    		<button class="btn btn-danger" type="button">Off</button>
+						    	</a>
+					    	@endif
+				    	</td>
+				    	<td>
+							@if ($status['site_'.$site->id.'_status_2'] == 'False')
+						    	<a href="/site/onCommand/{{ $site->id }}/2">
+						    		<button class="btn btn-success" type="button">On</button>
+						    	</a>
+					    	@else
+					    		<a href="/site/offCommand/{{ $site->id }}/2">
+						    		<button class="btn btn-danger" type="button">Off</button>
+						    	</a>
+					    	@endif
+				    	</td>
+				    	<td>
+							@if ($status['site_'.$site->id.'_status_3'] == 'False')
+						    	<a href="/site/onCommand/{{ $site->id }}/3">
+						    		<button class="btn btn-success" type="button">On</button>
+						    	</a>
+					    	@else
+					    		<a href="/site/offCommand/{{ $site->id }}/3">
+						    		<button class="btn btn-danger" type="button">Off</button>
+						    	</a>
+					    	@endif
+				    	</td>
+				    	<td>
+							@if ($status['site_'.$site->id.'_status_4'] == 'False')
+						    	<a href="/site/onCommand/{{ $site->id }}/4">
+						    		<button class="btn btn-success" type="button">On</button>
+						    	</a>
+					    	@else
+					    		<a href="/site/offCommand/{{ $site->id }}/4">
+						    		<button class="btn btn-danger" type="button">Off</button>
+						    	</a>
+					    	@endif
+				    	</td>
+				    	<td>
+							@if ($status['site_'.$site->id.'_status_5'] == 'False')
+						    	<a href="/site/onCommand/{{ $site->id }}/5">
+						    		<button class="btn btn-success" type="button">On</button>
+						    	</a>
+					    	@else
+					    		<a href="/site/offCommand/{{ $site->id }}/5">
+						    		<button class="btn btn-danger" type="button">Off</button>
+						    	</a>
+					    	@endif
+				    	</td>
 			        </tr>
 			    @endforeach
 			      
