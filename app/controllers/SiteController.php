@@ -211,4 +211,19 @@ class SiteController extends \BaseController {
         }
         return Redirect::to('site/');
     }
+
+    public function getAllCommands($id)
+    {
+    	$site = Site::find($id);
+    	$response = '>>>';
+    	for ($i=0; $i < 6; $i++) { 
+    		$relay = Relay::withSiteAndRelay($id, $i)->get()->first();
+    		if ($relay->status == 'True') {
+    			$response = $response . 1 . '>>>';
+    		}else{
+    			$response = $response . 0 . '>>>';
+    		}
+    	}
+    	return $response;
+    }
 }
