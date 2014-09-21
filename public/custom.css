@@ -4,7 +4,24 @@
 }
 
 .block_type{
-	min-height: 100px;
+	height: 640px;
+	margin: 5 auto;
+}
+
+.thumb-small{
+	max-width: 120px;
+	max-height: 140px;
+	margin: 5 auto;
+}
+
+.thumb{
+	max-width: 220px;
+	max-height: 340px;
+	margin: 5 auto;
+}
+
+.thumb-big{
+	max-width: 340px;
 	margin: 5 auto;
 }
 

@@ -190,7 +190,7 @@
 			@endif
 				@yield('flash')
 				@yield('content')
-				<div class="span8 offset4 well text-center">&#169; 2014 SoftBot Systems</div>			
+				<div class="col-md-12 well well-sm text-center">&#169; 2014 SoftBot Systems</div>			
 		</div>			
 		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 

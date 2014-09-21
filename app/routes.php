@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'LoginController@getIndex');
-// Route::post('login/attempt', 'LoginController@attempt');
+Route::controller('login', 'LoginController');
 
 Route::get('control', function()
 {
@@ -27,15 +27,20 @@ Route::get('control', function()
 	return View::make('control')->with('page', $page)->with('status', $status);
 });
 
-Route::get(
-	'/image/{file}',
-	'ImageController@getImage'
-);
+// Route::get(
+// 	'/image/{file}',
+// 	'ImageController@getImage'
+// );
 
-Route::get(
-    '/image/{size}/{file}',
-    'ImageController@getImage'
-);
+// Route::get(
+//     '/image/{size}/{file}',
+//     'ImageController@getImage'
+// );
+
+Route::filter('auth', function()
+{
+	if (Auth::admin()->guest()) return Redirect::guest('/');
+});
 
 Route::group(array('before'=>'auth'),function()
 {
@@ -51,10 +56,9 @@ Route::group(array('before'=>'auth'),function()
 	Route::get('zoneUser/{site_id}', 'ZoneUserController@index');
 	Route::post('zoneUser/update', 'ZoneUserController@update');
 
-	Route::post('user/updatePermissions', 'UserController@updatePermissions');
-
 	Route::resource('user', 'UserController');
-
+	Route::post('user/updatePermissions', 'UserController@updatePermissions');
+	
 	Route::resource('admin', 'AdminController');
 
 	Route::resource('zone', 'ZoneController');
@@ -83,9 +87,7 @@ Route::group(array('before'=>'auth'),function()
 
 	Route::controller('records', 'RecordController');
 
-	Route::controller('home', 'HomeController');
-
-	Route::controller('login', 'LoginController');
+	Route::controller('home', 'HomeController');	
 
 	Route::get('combo/', array('as' => 'report', 'uses' => 'ReportController@getCombo'));
 
