@@ -38,6 +38,7 @@ class HomeController extends BaseController {
 	{
 		$site = Site::find($id);
 		$relay_status = '>>>';
+		$count = 0;
     	for ($i=0; $i < 6; $i++) { 
     		$relay = Relay::withSiteAndRelay($id, $i)->get()->first();
     		if ($relay) {
@@ -47,6 +48,9 @@ class HomeController extends BaseController {
     		}else{
     			$relay_status = $relay_status . 0 . '>>>';
     		}
+    	}
+    	for ($i=$count; $i < 6; $i++) { 
+    		$relay_status . '>>>' . 0 . '>>>';
     	}
     	$users = '>>>';
     	$site_users = $site->Users;
