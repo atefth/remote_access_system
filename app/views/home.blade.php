@@ -10,7 +10,7 @@
 		<div class="row">
 		  <div class="col-sm-6">
 		    <div class="thumbnail">
-		    	<img class="thumb" src="http://{{ URL::to('/') }}/image/design.jpg">
+		    	<img class="thumb" src="{{ URL::to('/') }}/image/design.jpg">
 		      <div class="caption">
 		        <h3>Design</h3>
 		        <p>Read more about SoftBot's Design</p>
@@ -20,7 +20,7 @@
 		  </div>
 		  <div class="col-sm-6">
 		    <div class="thumbnail">
-		    	<img class="thumb" src="http://{{ URL::to('/') }}/image/innovation.jpg">
+		    	<img class="thumb" src="{{ URL::to('/') }}/image/innovation.jpg">
 		      <div class="caption">
 		        <h3>Innovation</h3>
 		        <p>Read more about SoftBot's Innovation</p>
@@ -32,7 +32,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="thumbnail">
-					<img class="thumb-big" src="http://{{ URL::to('/') }}/image/initiative.jpg">
+					<img class="thumb-big" src="{{ URL::to('/') }}/image/initiative.jpg">
 			      <div class="caption">
 			        <h3>Initiative</h3>
 			        <p>Read more about SoftBot's Initiative</p>
@@ -44,7 +44,7 @@
 		<div class="row">
 			<div class="col-sm-4">
 			    <div class="thumbnail">
-			    	<img class="thumb-small" src="http://{{ URL::to('/') }}/image/interest.jpg">
+			    	<img class="thumb-small" src="{{ URL::to('/') }}/image/interest.jpg">
 				    <div class="caption">
 				        <h3>Interest</h3>
 				        <p>Read more about SoftBot's Interest</p>
@@ -54,7 +54,7 @@
 			</div>
 			<div class="col-sm-4">
 			    <div class="thumbnail">
-			    	<img class="thumb-small" src="http://{{ URL::to('/') }}/image/development.jpg">
+			    	<img class="thumb-small" src="{{ URL::to('/') }}/image/development.jpg">
 				    <div class="caption">
 				        <h3>Development</h3>
 				        <p>Read more about SoftBot's Development</p>
@@ -64,7 +64,7 @@
 			</div>
 			<div class="col-sm-4">
 			    <div class="thumbnail">
-			    	<img class="thumb-small" src="http://{{ URL::to('/') }}/image/contact.png">
+			    	<img class="thumb-small" src="{{ URL::to('/') }}/image/contact.png">
 				    <div class="caption">
 				        <h3>Contact</h3>
 				        <p>Contact us and set up a meeting now!</p>
