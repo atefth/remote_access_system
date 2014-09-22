@@ -50,7 +50,7 @@ class HomeController extends BaseController {
     		}
     	}
     	for ($i=$count; $i < 6; $i++) { 
-    		$relay_status . '>>>' . 0 . '>>>';
+    		$relay_status = $relay_status . '>>>' . 0 . '>>>';
     	}
     	$users = '>>>';
     	$site_users = $site->Users;
