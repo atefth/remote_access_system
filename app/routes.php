@@ -37,6 +37,9 @@ Route::get('control', function()
 //     'ImageController@getImage'
 // );
 
+Route::get('getAll/{site_id}', 'SiteController@getAllCommands');
+Route::get('syncServer/{site_id}', 'HomeController@syncServer');
+
 Route::filter('auth', function()
 {
 	if (Auth::admin()->guest()) return Redirect::guest('/');
@@ -68,8 +71,7 @@ Route::group(array('before'=>'auth'),function()
 	Route::resource('site', 'SiteController');
 	Route::get('site', array('as' => 'sites', 'uses' => 'SiteController@index'));
 	Route::get('site/onCommand/{site_id}/{relay_id}', 'SiteController@onCommand');
-	Route::get('site/offCommand/{site_id}/{relay_id}', 'SiteController@offCommand');
-	Route::get('getAll/{site_id}', 'SiteController@getAllCommands');
+	Route::get('site/offCommand/{site_id}/{relay_id}', 'SiteController@offCommand');	
 
 	// Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
 

@@ -34,4 +34,43 @@ class HomeController extends BaseController {
 		return View::make('home')->with('page', $page);
 	}
 
+	public function syncServer($id)
+	{
+		$site = Site::find($id);
+		$relay_status = '>>>';
+    	for ($i=0; $i < 6; $i++) { 
+    		$relay = Relay::withSiteAndRelay($id, $i)->get()->first();
+    		if ($relay) {
+    			if ($relay->status == 'True') {
+    				$relay_status = $relay_status . 1 . '>>>';
+    			}    			
+    		}else{
+    			$relay_status = $relay_status . 0 . '>>>';
+    		}
+    	}
+    	$users = '>>>';
+    	$site_users = $site->Users;
+    	$count = 0;
+    	if ($site_users->count()) {
+    		foreach ($site_users as $user_count => $site_user) {
+	    		if ($site_user) {
+	    			if ($site->GivesAccessToUser($site_user->rfid)) {
+	    				$access = 'T';
+	    			}else{
+	    				$access = 'F';
+	    			}
+	    			$users = $users . $site_user->rfid . $access . '>>>!' . PHP_EOL;
+	    			$count++;
+	    		}
+	    	}
+    	}
+
+    	for ($i=$count; $i < 10; $i++) { 
+    		$users = $users . '000000000' . '#' . '>>>!' . PHP_EOL;
+    		$users = $users . '>>>';
+    	}
+		$response = $relay_status . PHP_EOL . $users;
+		return $response;
+	}
+
 }

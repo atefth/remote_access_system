@@ -218,8 +218,10 @@ class SiteController extends \BaseController {
     	$response = '>>>';
     	for ($i=0; $i < 6; $i++) { 
     		$relay = Relay::withSiteAndRelay($id, $i)->get()->first();
-    		if ($relay->status == 'True') {
-    			$response = $response . 1 . '>>>';
+    		if ($relay) {
+    			if ($relay->status == 'True') {
+    				$response = $response . 1 . '>>>';
+    			}    			
     		}else{
     			$response = $response . 0 . '>>>';
     		}
