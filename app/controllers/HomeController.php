@@ -54,14 +54,9 @@ class HomeController extends BaseController {
     	$site_users = $site->Users;
     	$count = 0;
     	if ($site_users->count()) {
-    		foreach ($site_users as $user_count => $site_user) {
+    		foreach ($site_users as $site_user) {
 	    		if ($site_user) {
-	    			if ($site->GivesAccessToUser($site_user->rfid)) {
-	    				$access = 'T';
-	    			}else{
-	    				$access = 'F';
-	    			}
-	    			$users = $users . $site_user->rfid . $access . '>>>!' . PHP_EOL;
+	    			$users = $users . $site_user->rfid . '>>>!' . PHP_EOL;
 	    			$count++;
 	    		}
 	    	}
