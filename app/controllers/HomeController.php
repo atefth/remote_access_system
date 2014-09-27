@@ -63,7 +63,7 @@ class HomeController extends BaseController {
     	}
 
     	for ($i=$count; $i < 10; $i++) { 
-    		$users = $users . '000000000' . '#' . '>>>!' . PHP_EOL;
+    		$users = $users . '0000000' . '#' . '>>>!' . PHP_EOL;
     		$users = $users . '>>>';
     	}
 		$response = $relay_status . PHP_EOL . $users;
