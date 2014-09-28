@@ -23,7 +23,7 @@
 				            @foreach ($records as $record)
 				                <tr>
 				                    <td>{{ $record->site_id }}</td>
-							        <td>{{ $record->rfid }}</td>
+							        <td>{{ $record->user_id }}</td>
 							        <td>{{ $record->switch }}</td>
 							        <td>{{ $record->status }}</td>
 							        <td>{{ $record->command }}</td>

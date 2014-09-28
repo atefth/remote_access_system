@@ -70,4 +70,50 @@ class HomeController extends BaseController {
 		return $response;
 	}
 
+    public function remoteToOrigin($site_id, $relay_id, $status, $rfid, $access, $day, $month, $year, $hour, $min, $sec)
+    {
+        $timestamp =  mktime($hour, $min, $sec, $month, $day, $year);
+        $site = Site::find($site_id);
+
+        $site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
+        // dd($site_relay);
+        if ($access) {
+            if ($status) {
+                $site_relay->status = 'True';
+                $site_relay->save();
+                $entry = new Record;
+                $entry->site_id = $site_id;
+                $entry->site_name = $site->name;
+                $entry->switch = $relay_id;
+                $entry->user_id = $rfid;
+                $entry->status = 'On';
+                $entry->command = 1;
+                $entry->created_at = $timestamp;
+                $entry->save();
+            }else{
+                $site_relay->status = 'False';
+                $site_relay->save();
+                $entry = new Record;
+                $entry->site_id = $site_id;
+                $entry->site_name = $site->name;
+                $entry->switch = $relay_id;
+                $entry->user_id = $rfid;
+                $entry->status = 'Off';
+                $entry->command = 0;
+                $entry->created_at = $timestamp;
+                $entry->save();
+            }
+        }else{
+            $entry = new Record;
+                $entry->site_id = $site_id;
+                $entry->site_name = $site->name;
+                $entry->switch = $relay_id;
+                $entry->user_id = $rfid;
+                $entry->status = 'DENIED';
+                $entry->command = 0;
+                $entry->created_at = $timestamp;
+                $entry->save();
+        }
+    }
+
 }

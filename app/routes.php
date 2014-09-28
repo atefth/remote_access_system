@@ -39,6 +39,7 @@ Route::get('control', function()
 
 Route::get('getAll/{site_id}', 'SiteController@getAllCommands');
 Route::get('syncServer/{site_id}', 'HomeController@syncServer');
+Route::get('remoteToOrigin/{site_id}/{relay_id}/{status}/{rfid}/{access}/{day}/{month}/{year}/{hour}/{min}/{sec}', 'HomeController@remoteToOrigin');
 
 Route::filter('auth', function()
 {
