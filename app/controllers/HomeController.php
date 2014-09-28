@@ -119,7 +119,7 @@ class HomeController extends BaseController {
     public function closeDoor($id)
     {
         $site = Site::find($id);
-        $door = Relay::withSiteAndRelay($id, 0);
+        $door = Relay::withSiteAndRelay($id, 0)->get()->first();
         $door->status = 'False';
         $door->save();
 
