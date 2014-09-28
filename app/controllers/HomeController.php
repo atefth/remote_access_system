@@ -105,15 +105,32 @@ class HomeController extends BaseController {
             }
         }else{
             $entry = new Record;
-                $entry->site_id = $site_id;
-                $entry->site_name = $site->name;
-                $entry->switch = $relay_id;
-                $entry->user_id = $rfid;
-                $entry->status = 'DENIED';
-                $entry->command = 0;
-                $entry->created_at = $timestamp;
-                $entry->save();
-        }
+            $entry->site_id = $site_id;
+            $entry->site_name = $site->name;
+            $entry->switch = $relay_id;
+            $entry->user_id = $rfid;
+            $entry->status = 'DENIED';
+            $entry->command = 0;
+            $entry->created_at = $timestamp;
+            $entry->save();
+    }
+        return '#';
+    }
+    public function closeDoor($id)
+    {
+        $site = Site::find($id);
+        $door = Relay::withSiteAndRelay($id, 0);
+        $door->status = 'False';
+        $door->save();
+
+        $entry = new Record;
+        $entry->site_id = $id;
+        $entry->site_name = $site->name;
+        $entry->switch = 0;
+        $entry->status = 'Off';
+        $entry->command = 0;
+        $entry->save();
+
         return '#';
     }
 }
