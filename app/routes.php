@@ -74,19 +74,7 @@ Route::group(array('before'=>'auth'),function()
 	Route::get('site/onCommand/{site_id}/{relay_id}', 'SiteController@onCommand');
 	Route::get('site/offCommand/{site_id}/{relay_id}', 'SiteController@offCommand');	
 
-	// Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));
-
-	// Route::get('turnOffSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OffCommand'));
-
-	// Route::get('getCommand/{id}', array('as' => 'switch', 'uses' => 'RecordController@getCommand'));
-
-	// Route::get('getAll/', array('as' => 'switches', 'uses' => 'RecordController@getAll'));
-
-	// Route::get('verifyRFID/{id}', array('as' => 'site', 'uses' => 'RecordController@verifyRFID'));
-
-	// Route::get('confirmCommand/', array('as' => 'switch', 'uses' => 'RecordController@confirmCommand'));
-
-	// Route::get('uploadLog/{site_id}/{switch}/{status}/{rfid}/{created_at}/', array('as' => 'log', 'uses' => 'RecordController@uploadLog'));
+	// Route::get('turnOnSwitch/{id}', array('as' => 'switch', 'uses' => 'RecordController@OnCommand'));	
 
 	Route::controller('records', 'RecordController');
 

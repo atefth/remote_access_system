@@ -15461,3 +15461,7 @@ Stack trace:
 #10 /home/vagrant/code/remote_access_system/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(606): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
 #11 /home/vagrant/code/remote_access_system/public/index.php(49): Illuminate\Foundation\Application->run()
 #12 {main} [] []
+[2014-09-28 15:10:47] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected ')'' in /home/vagrant/code/remote_access_system/app/routes.php:43
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

@@ -114,6 +114,6 @@ class HomeController extends BaseController {
                 $entry->created_at = $timestamp;
                 $entry->save();
         }
+        return '#';
     }
-
 }
