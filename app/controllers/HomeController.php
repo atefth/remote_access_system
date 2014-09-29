@@ -72,7 +72,7 @@ class HomeController extends BaseController {
 
     public function remoteToOrigin($site_id, $relay_id, $status, $rfid, $access, $day, $month, $year, $hour, $min, $sec)
     {
-        $time = date('Y-m-d H:i:s') - (2 * 60);
+        $time = mktime(date('H'), (date('i') - 2), date('s'), date('n'), date('j'), date('Y'));
         $timestamp = strtotime($time);
         // $timestamp =  mktime($hour, $min, $sec, $month, $day, $year);
 
@@ -126,7 +126,7 @@ class HomeController extends BaseController {
         $door->status = 'False';
         $door->save();
 
-        $time = date('Y-m-d H:i:s') - (2 * 60);
+        $time = mktime(date('H'), (date('i') - 2), date('s'), date('n'), date('j'), date('Y'));
         $timestamp = strtotime($time);
 
         $entry = new Record;
