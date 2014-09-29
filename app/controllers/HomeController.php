@@ -72,7 +72,10 @@ class HomeController extends BaseController {
 
     public function remoteToOrigin($site_id, $relay_id, $status, $rfid, $access, $day, $month, $year, $hour, $min, $sec)
     {
-        $timestamp =  mktime($hour, $min, $sec, $month, $day, $year);
+        $time = date('Y-m-d H:i:s') - (2 * 60);
+        $timestamp = strtotime($time);
+        // $timestamp =  mktime($hour, $min, $sec, $month, $day, $year);
+
         $site = Site::find($site_id);
 
         $site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
@@ -123,12 +126,16 @@ class HomeController extends BaseController {
         $door->status = 'False';
         $door->save();
 
+        $time = date('Y-m-d H:i:s') - (2 * 60);
+        $timestamp = strtotime($time);
+
         $entry = new Record;
         $entry->site_id = $id;
         $entry->site_name = $site->name;
         $entry->switch = 0;
         $entry->status = 'Off';
         $entry->command = 0;
+        $entry->created_at = $timestamp;
         $entry->save();
 
         return '#';
