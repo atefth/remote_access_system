@@ -180,7 +180,7 @@ class SiteController extends \BaseController {
         	$message = 'This site is zoned. Please update changes to the zone!';        	
         	Session::put('message', $message);
         }
-        return Redirect::to('site');
+        return Redirect::to('site/'.$site_id);
     }
 
     public function OffCommand($site_id, $relay_id)
@@ -209,7 +209,7 @@ class SiteController extends \BaseController {
         	$message = 'This site is zoned. Please update changes to the zone!';
         	Session::put('message', $message);
         }
-        return Redirect::to('site/');
+        return Redirect::to('site/'.$site_id);
     }
 
     public function getAllCommands($id)

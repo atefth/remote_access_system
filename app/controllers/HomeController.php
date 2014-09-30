@@ -72,14 +72,13 @@ class HomeController extends BaseController {
 
     public function remoteToOrigin($site_id, $relay_id, $status, $rfid, $access, $day, $month, $year, $hour, $min, $sec)
     {
-        $time = mktime(date('H'), (date('i') - 2), date('s'), date('n'), date('j'), date('Y'));
-        $timestamp = strtotime($time);
+        $timestamp = time() - (2*60);
         // $timestamp =  mktime($hour, $min, $sec, $month, $day, $year);
 
         $site = Site::find($site_id);
 
         $site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
-        // dd($site_relay);
+
         if ($access) {
             if ($status) {
                 $site_relay->status = 'True';
@@ -121,13 +120,19 @@ class HomeController extends BaseController {
     }
     public function closeDoor($id)
     {
-        $site = Site::find($id);
+        $site = Site::find($id);        
         $door = Relay::withSiteAndRelay($id, 0)->get()->first();
-        $door->status = 'False';
-        $door->save();
-
-        $time = mktime(date('H'), (date('i') - 2), date('s'), date('n'), date('j'), date('Y'));
-        $timestamp = strtotime($time);
+        if (!$door) {
+            for ($i=0; $i < 6; $i++) { 
+                    Relay::create(array('site_id' => $id, 'relay_id' => $i, 'status' => 'False'));
+                }
+            $door = Relay::withSiteAndRelay($id, 0)->get()->first();
+        }else{            
+            $door->status = 'False';
+            $door->save();
+        }
+        
+        $timestamp = time() - (2*60);
 
         $entry = new Record;
         $entry->site_id = $id;

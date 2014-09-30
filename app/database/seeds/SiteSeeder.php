@@ -10,15 +10,8 @@ class SiteSeeder extends Seeder {
                 Site::create(array(
                     'name' => 'BTS_'.$i.$j
                 ));
-                // for ($p=0; $p < 6; $p++) { 
-                //     Relay::create(array(
-                //         'site_id' => (($i * $j) + $j), 
-                //         'relay_id' => $p, 
-                //         'status' => 'False'
-                //     ));
-                // }
             }
-        }        
+        }
     }
 
 }
