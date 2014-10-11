@@ -115,12 +115,12 @@ class HomeController extends BaseController {
             $entry->command = 0;
             $entry->created_at = $timestamp;
             $entry->save();
-    }
+        }
         return '#';
     }
     public function closeDoor($id)
     {
-        $site = Site::find($id);        
+        $site = Site::find($id);
         $door = Relay::withSiteAndRelay($id, 0)->get()->first();
         if (!$door) {
             for ($i=0; $i < 6; $i++) { 
@@ -144,5 +144,30 @@ class HomeController extends BaseController {
         $entry->save();
 
         return '#';
+    }
+    public function sites()
+    {
+        $sites = Site::all()->toJson();
+        return $sites;
+        // Response::json($sites);
+    }
+    public function zones()
+    {
+        $zones = Zone::all()->toJson();
+        return $zones;
+        // Response::json($zones);
+    }
+    public function users()
+    {
+        $users = User::all()->toJson();
+        return $users;
+        // Response::json($users);
+    }
+    public function relays($site_id)
+    {
+        $site = Site::find($site_id);
+        $relays = $site->Relays->toJson();
+        return $relays;
+        // Response::json($relays);
     }
 }

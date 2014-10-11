@@ -42,6 +42,10 @@ Route::get('syncServer/{site_id}', 'HomeController@syncServer');
 Route::get('remoteToOrigin/{site_id}/{relay_id}/{status}/{rfid}/{access}/{day}/{month}/{year}/{hour}/{min}/{sec}', 'HomeController@remoteToOrigin');
 Route::get('closeDoor/{site_id}', 'HomeController@closeDoor');
 
+Route::get('sites', 'HomeController@sites');
+Route::get('users', 'HomeController@users');
+Route::get('relays/{site_id}', 'HomeController@relays');
+
 Route::filter('auth', function()
 {
 	if (Auth::admin()->guest()) return Redirect::guest('/');
