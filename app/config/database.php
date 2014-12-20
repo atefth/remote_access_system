@@ -1,5 +1,12 @@
 <?php
 
+$url = parse_url(getenv("DATABASE_URL"));
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
+
 return array(
 
 	/*
@@ -65,10 +72,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'ec2-54-83-204-85.compute-1.amazonaws.com',
-			'database' => 'd96hipebrgremd',
-			'username' => 'zzgtohrpdnphbi',
-			'password' => '72AgjwlCpoWL_c0E4FacbzjBw-',
+			'host'     => $host,
+			'database' => $database,
+			'username' => $username,
+			'password' => $password,
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
