@@ -168,7 +168,7 @@
 					  	<a href="/user"><span class="glyphicon glyphicon-user"></span> Users</a>
 					  </li>
 					  <li>
-					  	<a href="/login/logout" class="pull-right"><span class="glyphicon glyphicon-off"></span> Logout</a>
+					  	<a href="logout" class="pull-right"><span class="glyphicon glyphicon-off"></span> Logout</a>
 					  </li>
 					</ul>
 				  </div>
