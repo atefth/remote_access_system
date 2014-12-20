@@ -12,8 +12,10 @@
 */
 
 Route::get('/', 'LoginController@getIndex');
+Route::get('logout', 'LoginController@getLogout');
 Route::post('login', 'LoginController@postLogin');
-Route::controller('login', 'LoginController');
+Route::post('/', 'LoginController@postIndex');
+// Route::controller('login', 'LoginController');
 
 Route::get('control', function()
 {
