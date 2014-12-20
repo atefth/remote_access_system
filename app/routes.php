@@ -46,6 +46,7 @@ Route::get('remoteToOrigin/{site_id}/{relay_id}/{status}/{rfid}/{access}/{day}/{
 Route::get('closeDoor/{site_id}', 'HomeController@closeDoor');
 
 Route::get('sites', 'HomeController@sites');
+Route::get('sites/{rfid}', 'HomeController@sitesForUser');
 Route::get('users', 'HomeController@users');
 Route::get('zones', 'HomeController@zones');
 Route::get('relays/{site_id}', 'HomeController@relays');

@@ -170,4 +170,11 @@ class HomeController extends BaseController {
         return $relays;
         // Response::json($relays);
     }
+
+    public function sitesForUser($rfid)
+    {
+        $user = User::find($rfid);
+        $sites = $user->Sites->toJson();
+        return $sites;
+    }
 }
