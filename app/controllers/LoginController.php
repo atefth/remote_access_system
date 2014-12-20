@@ -23,6 +23,21 @@ class LoginController extends \BaseController {
 		}
 	}
 
+	public function postLogin()
+	{
+		$userdata = array(
+			'f_name' => Input::get('username'),
+			'rfid' => Input::get('rfid')
+			);
+		$users = User::all();
+		foreach ($users as $key => $user) {
+			if ($userdata['f_name'] == $user->f_name && $userdata['rfid'] == $user->rfid) {
+				return 'success';
+			}
+		}
+		return 'failed';
+	}
+
 	public function getLogout()
 	{
 		Auth::admin()->logout();
