@@ -241,7 +241,7 @@ class SiteController extends \BaseController {
 			}
 			$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
 			$relay = Relay::find($site_relay->id);
-			if ($status == "0") {
+			if ($status == 0) {
 				$statusCommand = 0;
 				$statusString = 'Off';
 				$status = 0;
