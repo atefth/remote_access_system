@@ -244,11 +244,11 @@ class SiteController extends \BaseController {
 			if ($status == "0") {
 				$statusCommand = 0;
 				$statusString = 'Off';
-				$status = false;
+				$status = 0;
 			}else{
 				$statusCommand = 1;
 				$statusString = 'On';
-				$status = true;
+				$status = 1;
 			}
 			$relay->status = $status;
 			$relay->save();
