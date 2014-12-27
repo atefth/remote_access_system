@@ -5,15 +5,15 @@ class SiteController extends \BaseController {
 	/**
      * Instantiate a new SiteController instance.
      */
-    public function __construct()
-    {
-        $this->beforeFilter(function()
-        {
-            if (!Auth::admin()) {
-            	return Redirect::to('/');
-            }
-        });
-    }
+	public function __construct()
+	{
+		$this->beforeFilter(function()
+		{
+			if (!Auth::admin()) {
+				return Redirect::to('/');
+			}
+		});
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -153,79 +153,117 @@ class SiteController extends \BaseController {
 		//
 	}
 
-    public function onCommand($site_id, $relay_id)
-    {
-        $site = Site::find($site_id);
-        if (!$site->Zone) {
-        	$site_relays = $site->Relays;
-	        if (!$site_relays->count()) {
-	        	for ($i=0; $i < 6; $i++) { 
-	        		Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
-	        	}
-	        }
-	    	$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
-	    	$relay = Relay::find($site_relay->id);
-	    	$relay->status = 'True';
-	    	$relay->save();
+	public function onCommand($site_id, $relay_id)
+	{
+		$site = Site::find($site_id);
+		if (!$site->Zone) {
+			$site_relays = $site->Relays;
+			if (!$site_relays->count()) {
+				for ($i=0; $i < 6; $i++) { 
+					Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
+				}
+			}
+			$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
+			$relay = Relay::find($site_relay->id);
+			$relay->status = 'True';
+			$relay->save();
 
-	    	$entry = new Record;
-	        $entry->site_id = $site_id;
-	        $entry->site_name = $site->name;
-	        $entry->switch = $relay->relay_id;
-	    	$entry->status = 'On';
-	    	$entry->command = 1;
-	    	$entry->save();
+			$entry = new Record;
+			$entry->site_id = $site_id;
+			$entry->site_name = $site->name;
+			$entry->switch = $relay->relay_id;
+			$entry->status = 'On';
+			$entry->command = 1;
+			$entry->save();
 
-        }else{
-        	$message = 'This site is zoned. Please update changes to the zone!';        	
-        	Session::put('message', $message);
-        }
-        return Redirect::to('site/'.$site_id);
-    }
+		}else{
+			$message = 'This site is zoned. Please update changes to the zone!';        	
+			Session::put('message', $message);
+		}
+		return Redirect::to('site/'.$site_id);
+	}
 
-    public function OffCommand($site_id, $relay_id)
-    {
-        $site = Site::find($site_id);
-	    if (!$site->Zone) {
-	    	$site_relays = $site->Relays;
-	        if (!$site_relays->count()) {
-	        	for ($i=0; $i < 6; $i++) { 
-	        		Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
-	        	}        	
-	        }
-	    	$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
-	    	$relay = Relay::find($site_relay->id);
-	    	$relay->status = 'False';
-	    	$relay->save();
+	public function OffCommand($site_id, $relay_id)
+	{
+		$site = Site::find($site_id);
+		if (!$site->Zone) {
+			$site_relays = $site->Relays;
+			if (!$site_relays->count()) {
+				for ($i=0; $i < 6; $i++) { 
+					Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
+				}        	
+			}
+			$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
+			$relay = Relay::find($site_relay->id);
+			$relay->status = 'False';
+			$relay->save();
 
-	    	$entry = new Record;
-	        $entry->site_id = $site_id;
-	        $entry->site_name = $site->name;
-	        $entry->switch = $relay->relay_id;
-	    	$entry->status = 'Off';
-	    	$entry->command = 0;
-	    	$entry->save();
-        }else{
-        	$message = 'This site is zoned. Please update changes to the zone!';
-        	Session::put('message', $message);
-        }
-        return Redirect::to('site/'.$site_id);
-    }
+			$entry = new Record;
+			$entry->site_id = $site_id;
+			$entry->site_name = $site->name;
+			$entry->switch = $relay->relay_id;
+			$entry->status = 'Off';
+			$entry->command = 0;
+			$entry->save();
+		}else{
+			$message = 'This site is zoned. Please update changes to the zone!';
+			Session::put('message', $message);
+		}
+		return Redirect::to('site/'.$site_id);
+	}
 
-    public function getAllCommands($id)
-    {
-    	$site = Site::find($id);
-    	$response = '>>>';
-    	for ($i=0; $i < 6; $i++) { 
-    		$relay = Relay::withSiteAndRelay($id, $i)->get()->first();
-    		if ($relay) {
-    			if ($relay->status == 'True') {
-    				$response = $response . 1 . '>>>';
-    			}    			
-    		}else{
-    			$response = $response . 0 . '>>>';
-    		}
-    	}
-    	return $response;
-    }
+	public function getAllCommands($id)
+	{
+		$site = Site::find($id);
+		$response = '>>>';
+		for ($i=0; $i < 6; $i++) { 
+			$relay = Relay::withSiteAndRelay($id, $i)->get()->first();
+			if ($relay) {
+				if ($relay->status == 'True') {
+					$response = $response . 1 . '>>>';
+				}    			
+			}else{
+				$response = $response . 0 . '>>>';
+			}
+		}
+		return $response;
+	}
+
+	public function updateSiteRelay($site_id, $relay_id, $status)
+	{
+		$site = Site::find($site_id);
+		if (!$site->Zone) {
+			$site_relays = $site->Relays;
+			if (!$site_relays->count()) {
+				for ($i=0; $i < 6; $i++) { 
+					Relay::create(array('site_id' => $site_id, 'relay_id' => $i, 'status' => 'False'));
+				}
+			}
+			$site_relay = Relay::withSiteAndRelay($site_id, $relay_id)->get()->first();
+			$relay = Relay::find($site_relay->id);
+			if ($status == "0") {
+				$statusCommand = 0;
+				$statusString = 'Off';
+				$status = false;
+			}else{
+				$statusCommand = 1;
+				$statusString = 'On';
+				$status = true;
+			}
+			$relay->status = $status;
+			$relay->save();
+
+			$entry = new Record;
+			$entry->site_id = $site_id;
+			$entry->site_name = $site->name;
+			$entry->switch = $relay->relay_id;
+			$entry->status = $statusString;
+			$entry->command = $statusCommand;
+			$entry->save();
+
+		}else{
+			$message = 'This site is zoned. Please update changes to the zone!';        	
+			Session::put('message', $message);
+		}
+	}
 }
