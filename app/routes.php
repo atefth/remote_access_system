@@ -51,6 +51,7 @@ Route::get('users', 'HomeController@users');
 Route::get('zones', 'HomeController@zones');
 Route::get('zones/{rfid}', 'HomeController@zonesForUser');
 Route::get('relays/{site_id}', 'HomeController@relays');
+Route::get('updateSiteRelay/{site_id}/{relay_id}/{status}', 'SiteController@updateSiteRelay');
 
 Route::filter('auth', function()
 {
@@ -84,8 +85,6 @@ Route::group(array('before'=>'auth'),function()
 	Route::get('site', array('as' => 'sites', 'uses' => 'SiteController@index'));
 	Route::get('site/onCommand/{site_id}/{relay_id}', 'SiteController@onCommand');
 	Route::get('site/offCommand/{site_id}/{relay_id}', 'SiteController@offCommand');	
-
-	Route::get('updateSiteRelay/{site_id}/{relay_id}/{status}', 'SiteController@updateSiteRelay');	
 
 	Route::controller('records', 'RecordController');
 
